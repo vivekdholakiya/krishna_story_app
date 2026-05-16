@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "291416346723",
+    "project_id": "krishna-story-app",
+    "storage_bucket": "krishna-story-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291416346723:android:aca41430d576f6d6a32856",
+        "android_client_info": {
+          "package_name": "com.vivek.krishna.stories"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiPKRQK85AHvqnNpcF53Bvz1ZIDCMNKRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

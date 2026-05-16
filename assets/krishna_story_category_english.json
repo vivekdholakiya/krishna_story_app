@@ -1,0 +1,596 @@
+{
+  "krishna_story_categories": [
+    {
+      "category": "Birth of Krishna",
+      "id": "1",
+      "stories": [
+        "Prophecy of Krishna’s Birth",
+        "Devaki and Vasudev Imprisoned",
+        "Birth in Mathura Jail",
+        "Divine Signs at Birth",
+        "Chains Break Automatically",
+        "Night of Miracles",
+        "Guards Fall Asleep",
+        "Vasudev Lifts Baby Krishna",
+        "Rain Stops the Way",
+        "Beginning of a Divine Era"
+      ]
+    },
+    {
+      "category": "Journey to Gokul",
+      "id": "2",
+      "stories": [
+        "Crossing the Yamuna",
+        "Sheshnag Protects Krishna",
+        "Yamuna Makes Way",
+        "Arrival in Gokul",
+        "Exchange with Yogmaya",
+        "Return to Mathura",
+        "Krishna’s First Protection",
+        "Divine Planning",
+        "Gokul Welcomes Krishna",
+        "Start of Childhood Leela"
+      ]
+    },
+    {
+      "category": "Bal Krishna Childhood",
+      "id": "3",
+      "stories": [
+        "Naming Ceremony",
+        "Krishna Crawls First Time",
+        "Playing with Cowherd Boys",
+        "Krishna Learns to Walk",
+        "First Smile of Krishna",
+        "Village Loves Krishna",
+        "Krishna Plays in Courtyard",
+        "Sleeping on Yashoda’s Lap",
+        "Early Signs of Divinity",
+        "Joy of Gokul"
+      ]
+    },
+    {
+      "category": "Makhan Chor Leela",
+      "id": "4",
+      "stories": [
+        "Krishna Steals Butter",
+        "Breaking the Butter Pot",
+        "Complaints from Neighbors",
+        "Krishna’s Clever Excuses",
+        "Butter Party with Friends",
+        "Punishment by Yashoda",
+        "Butter on Krishna’s Face",
+        "Love Behind Mischief",
+        "Makhan Chor Name",
+        "Joyful Childhood"
+      ]
+    },
+    {
+      "category": "Yashoda & Krishna",
+      "id": "5",
+      "stories": [
+        "Motherly Love of Yashoda",
+        "Yashoda Scolds Krishna",
+        "Krishna Cries Innocently",
+        "Binding Krishna with Rope",
+        "Universe in Krishna’s Mouth",
+        "Yashoda’s Wonder",
+        "Motherhood and Godhood",
+        "Yashoda’s Devotion",
+        "Krishna as Her Son",
+        "Pure Love of Mother"
+      ]
+    },
+    {
+      "category": "Krishna’s Early Miracles",
+      "id": "6",
+      "stories": [
+        "Killing of Putana",
+        "Defeat of Trinavarta",
+        "Breaking the Twin Trees",
+        "Saving from Fire",
+        "Protecting Cowherd Boys",
+        "Miracle of Endless Butter",
+        "Divine Strength",
+        "Fearless Krishna",
+        "God Protects Devotees",
+        "Victory of Innocence"
+      ]
+    },
+    {
+      "category": "Govardhan Leela",
+      "id": "7",
+      "stories": [
+        "Indra’s Anger",
+        "Krishna Stops Indra Puja",
+        "Govardhan Worship",
+        "Seven Days of Rain",
+        "Krishna Lifts Govardhan",
+        "Protection of Gokul",
+        "Indra’s Realization",
+        "Indra Seeks Forgiveness",
+        "Victory of Bhakti",
+        "Faith over Ego"
+      ]
+    },
+    {
+      "category": "Kaliya Naag Leela",
+      "id": "8",
+      "stories": [
+        "Poisoned Yamuna",
+        "Krishna Jumps into River",
+        "Battle with Kaliya",
+        "Dance on Kaliya’s Head",
+        "Wives of Kaliya Pray",
+        "Mercy of Krishna",
+        "Kaliya Leaves Yamuna",
+        "Purification of River",
+        "Krishna’s Compassion",
+        "Triumph of Dharma"
+      ]
+    },
+    {
+      "category": "Vrindavan Life",
+      "id": "9",
+      "stories": [
+        "Daily Life in Vrindavan",
+        "Krishna with Cows",
+        "Forest Adventures",
+        "Playing with Friends",
+        "Festivals of Vrindavan",
+        "Music and Dance",
+        "Village Happiness",
+        "Krishna and Nature",
+        "Simple Living",
+        "Divine Village"
+      ]
+    },
+    {
+      "category": "Krishna’s FluteFlute",
+      "id": "10",
+      "stories": [
+        "First Flute Melody",
+        "Flute Calls Gopis",
+        "Nature Listens",
+        "Animals Stop Moving",
+        "Flute at Sunset",
+        "Music of the Soul",
+        "Love through Melody",
+        "Flute and Devotion",
+        "Divine Sound",
+        "Eternal Music"
+      ]
+    },
+    {
+      "category": "Radha Krishna Love",
+      "id": "11",
+      "stories": [
+        "First Meeting",
+        "Radha’s Devotion",
+        "Krishna’s Promise",
+        "Ras Leela",
+        "Divine Separation",
+        "Pain of Longing",
+        "Spiritual Love",
+        "Union of Souls",
+        "Symbol of Bhakti",
+        "Eternal Love"
+      ]
+    },
+    {
+      "category": "Gopi Leela",
+      "id": "12",
+      "stories": [
+        "Gopis’ Devotion",
+        "Krishna Tests Gopis",
+        "Stealing Gopis’ Clothes",
+        "Ras Dance Night",
+        "Pure Love of Gopis",
+        "Krishna’s Teachings",
+        "Devotion over Ego",
+        "Spiritual Surrender",
+        "Gopis’ Sacrifice",
+        "Path of Bhakti"
+      ]
+    },
+    {
+      "category": "Mathura Return",
+      "id": "13",
+      "stories": [
+        "Krishna Leaves Vrindavan",
+        "Pain of Separation",
+        "Journey to Mathura",
+        "Breaking Kansa’s Bow",
+        "Defeat of Kansa",
+        "Freedom of Parents",
+        "Justice Restored",
+        "End of Tyranny",
+        "People Rejoice",
+        "Krishna as Protector"
+      ]
+    },
+    {
+      "category": "Krishna as Prince",
+      "id": "14",
+      "stories": [
+        "Life in Mathura",
+        "Royal Duties",
+        "Learning Warfare",
+        "Leadership Skills",
+        "Protection of Kingdom",
+        "Wisdom of Youth",
+        "Respect for Elders",
+        "Justice and Mercy",
+        "Strength with Compassion",
+        "Ideal Prince"
+      ]
+    },
+    {
+      "category": "Dwarka Kingdom",
+      "id": "15",
+      "stories": [
+        "Building Dwarka",
+        "Golden City",
+        "Sea Protects Dwarka",
+        "Krishna as King",
+        "Prosperity of Dwarka",
+        "Protection of Citizens",
+        "Divine Governance",
+        "Peaceful Kingdom",
+        "Cultural Growth",
+        "Ideal City"
+      ]
+    },
+    {
+      "category": "Rukmini Marriage",
+      "id": "16",
+      "stories": [
+        "Rukmini’s Letter",
+        "Krishna Rescues Rukmini",
+        "Wedding Celebration",
+        "Divine Union",
+        "Love and Courage",
+        "Opposition Defeated",
+        "Rukmini as Queen",
+        "Blessings of Gods",
+        "Symbol of Devotion",
+        "Sacred Marriage"
+      ]
+    },
+    {
+      "category": "Krishna’s Other Marriages",
+      "id": "17",
+      "stories": [
+        "Marriage to Satyabhama",
+        "Krishna and Jambavati",
+        "Respect for Women",
+        "Multiple Roles of Krishna",
+        "Responsibility and Dharma",
+        "Harmony in Family",
+        "Divine Balance",
+        "Royal Household",
+        "Lessons of Equality",
+        "Family Values"
+      ]
+    },
+    {
+      "category": "Krishna & Sudama",
+      "id": "18",
+      "stories": [
+        "Childhood Friendship",
+        "Sudama Visits Dwarka",
+        "Gift of Flattened Rice",
+        "Krishna’s Warm Welcome",
+        "True Friendship",
+        "Sudama’s Humility",
+        "Blessing without Asking",
+        "Transformation of Life",
+        "Friendship Beyond Wealth",
+        "Grace of Krishna"
+      ]
+    },
+    {
+      "category": "Krishna & Pandavas",
+      "id": "19",
+      "stories": [
+        "Friendship with Pandavas",
+        "Guiding Yudhishthira",
+        "Protecting Draupadi",
+        "Krishna’s Strategies",
+        "Support in Exile",
+        "Moral Guidance",
+        "Faith in Krishna",
+        "Divine Planning",
+        "Hope in Hardship",
+        "Victory through Dharma"
+      ]
+    },
+    {
+      "category": "Krishna & Draupadi",
+      "id": "20",
+      "stories": [
+        "Krishna Protects Draupadi",
+        "Endless Saree Miracle",
+        "Faith Saves Honor",
+        "Krishna’s Promise",
+        "Justice Delayed",
+        "Trust in God",
+        "Strength of Devotion",
+        "Dharma Tested",
+        "Krishna’s Compassion",
+        "Hope Restored"
+      ]
+    },
+    {
+      "category": "Krishna the Diplomat",
+      "id": "21",
+      "stories": [
+        "Peace Mission",
+        "Message to Kauravas",
+        "Efforts to Avoid War",
+        "Wisdom in Words",
+        "Humility and Power",
+        "Diplomatic Skills",
+        "Respectful Negotiation",
+        "Failure of Ego",
+        "Krishna’s Patience",
+        "Lesson of Peace"
+      ]
+    },
+    {
+      "category": "Kurukshetra War",
+      "id": "22",
+      "stories": [
+        "Beginning of War",
+        "Krishna as Charioteer",
+        "Blowing Panchajanya",
+        "Moral Battlefield",
+        "Divine Presence",
+        "War Ethics",
+        "Protection of Dharma",
+        "Strategic Guidance",
+        "Faith of Warriors",
+        "Destiny Unfolds"
+      ]
+    },
+    {
+      "category": "Bhagavad Gita Teachings",
+      "id": "23",
+      "stories": [
+        "Arjuna’s Confusion",
+        "Meaning of Karma",
+        "Path of Bhakti",
+        "Detachment from Results",
+        "Selfless Action",
+        "Nature of Soul",
+        "Dharma Explained",
+        "Control of Mind",
+        "Vision of Vishvarupa",
+        "Eternal Knowledge"
+      ]
+    },
+    {
+      "category": "Krishna’s Vishvarupa",
+      "id": "24",
+      "stories": [
+        "Divine Cosmic Form",
+        "Arjuna’s Vision",
+        "Universe in Krishna",
+        "Time as Destroyer",
+        "God Beyond Form",
+        "Fear and Wonder",
+        "Universal Truth",
+        "Power of God",
+        "Faith Strengthened",
+        "Reality Revealed"
+      ]
+    },
+    {
+      "category": "Krishna’s Strategies",
+      "id": "25",
+      "stories": [
+        "Saving Arjuna",
+        "Defeat of Bhishma",
+        "Fall of Drona",
+        "End of Karna",
+        "Strategic Silence",
+        "Use of Dharma",
+        "Intelligence over Strength",
+        "Victory Planning",
+        "War Ethics",
+        "Divine Wisdom"
+      ]
+    },
+    {
+      "category": "End of War",
+      "id": "26",
+      "stories": [
+        "Victory of Pandavas",
+        "Justice Restored",
+        "Aftermath of War",
+        "Lessons of Destruction",
+        "Peace Returns",
+        "Krishna Consoles",
+        "Dharma Established",
+        "Sacrifice Remembered",
+        "Human Cost of War",
+        "Reflection on Life"
+      ]
+    },
+    {
+      "category": "Krishna as Teacher",
+      "id": "27",
+      "stories": [
+        "Teaching Kings",
+        "Guiding Devotees",
+        "Lessons through Actions",
+        "Silent Teachings",
+        "Life as Classroom",
+        "Moral Guidance",
+        "Wisdom for All",
+        "Simple Examples",
+        "Universal Teacher",
+        "Eternal Guru"
+      ]
+    },
+    {
+      "category": "Krishna & Bhakti",
+      "id": "28",
+      "stories": [
+        "Power of Devotion",
+        "Love over Ritual",
+        "Faith without Fear",
+        "Surrender to God",
+        "Devotion of Gopis",
+        "Sudama’s Faith",
+        "Draupadi’s Trust",
+        "True Bhakti",
+        "God Responds to Love",
+        "Path to Moksha"
+      ]
+    },
+    {
+      "category": "Krishna’s Compassion",
+      "id": "29",
+      "stories": [
+        "Mercy to Enemies",
+        "Forgiveness",
+        "Helping the Weak",
+        "Listening to Devotees",
+        "Compassion in War",
+        "Love for All",
+        "No Discrimination",
+        "Helping the Poor",
+        "Divine Kindness",
+        "Grace of God"
+      ]
+    },
+    {
+      "category": "Krishna & Karma",
+      "id": "30",
+      "stories": [
+        "Law of Action",
+        "Duty without Attachment",
+        "Results Belong to God",
+        "Work as Worship",
+        "Right Action",
+        "Avoiding Ego",
+        "Inner Discipline",
+        "Self-Control",
+        "Karma Yoga",
+        "Liberation through Action"
+      ]
+    },
+    {
+      "category": "Krishna’s Final Days",
+      "id": "31",
+      "stories": [
+        "End of Yadava Clan",
+        "Departure from Dwarka",
+        "Meditation in Forest",
+        "Hunter’s Arrow",
+        "Krishna Leaves Earth",
+        "Return to Divine Abode",
+        "End of Avatar",
+        "Cosmic Cycle",
+        "Lesson of Impermanence",
+        "Eternal Presence"
+      ]
+    },
+    {
+      "category": "Krishna’s Legacy",
+      "id": "32",
+      "stories": [
+        "Influence on Humanity",
+        "Teachings Across Ages",
+        "Devotion in Kaliyuga",
+        "Bhagavad Gita Impact",
+        "Cultural Influence",
+        "Spiritual Guidance",
+        "Universal Relevance",
+        "Living Dharma",
+        "Faith Across Generations",
+        "Eternal Krishna"
+      ]
+    },
+    {
+      "category": "Krishna Stories for Kids",
+      "id": "33",
+      "stories": [
+        "Cute Bal Krishna",
+        "Butter Stealing Fun",
+        "Flute Magic",
+        "Friendly Krishna",
+        "Helping Friends",
+        "Funny Mischief",
+        "Kindness Lessons",
+        "Sharing Love",
+        "God as Friend",
+        "Joyful Stories"
+      ]
+    },
+    {
+      "category": "Krishna Moral Stories",
+      "id": "34",
+      "stories": [
+        "Truth Wins",
+        "Ego Leads to Fall",
+        "Power of Faith",
+        "Importance of Duty",
+        "Respect Elders",
+        "Help Others",
+        "Control Anger",
+        "Stay Humble",
+        "Choose Right Path",
+        "Live with Values"
+      ]
+    },
+    {
+      "category": "Krishna Inspirational Stories",
+      "id": "35",
+      "stories": [
+        "Hope in Darkness",
+        "Courage in Fear",
+        "Faith in Crisis",
+        "Strength through Devotion",
+        "Purpose of Life",
+        "Inner Peace",
+        "Facing Challenges",
+        "Trust God",
+        "Never Give Up",
+        "Spiritual Strength"
+      ]
+    },
+    {
+      "category": "Krishna Short Stories",
+      "id": "36",
+      "stories": [
+        "One Lesson One Story",
+        "Daily Krishna Wisdom",
+        "Quick Devotional Tales",
+        "Short Moral Lessons",
+        "Simple Teachings",
+        "Small Leelas",
+        "Instant Inspiration",
+        "Mini Gita Stories",
+        "Fast Reading",
+        "Daily Bhakti"
+      ]
+    },
+    {
+      "category": "Krishna Daily Katha",
+      "id": "37",
+      "stories": [
+        "Morning Devotion",
+        "Daily Leela",
+        "Thought of the Day",
+        "Krishna’s Message",
+        "Peaceful Start",
+        "Daily Wisdom",
+        "Mindfulness with Krishna",
+        "Devotional Routine",
+        "Spiritual Habit",
+        "Daily Blessings"
+      ]
+    }
+  ]
+}
