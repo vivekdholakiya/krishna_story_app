@@ -9,6 +9,7 @@ import 'package:krishna_stories_app/services/audio_analytics.dart';
 import 'package:krishna_stories_app/services/audio_manifest.dart';
 import 'package:krishna_stories_app/services/audio_service.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
+import 'package:krishna_stories_app/services/review_service.dart';
 import '../services/app_text_data.dart';
 import '../services/favorite_service.dart';
 import '../services/util.dart';
@@ -404,6 +405,8 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
         storyIndex: widget.storyIndex,
         categoryName: widget.categoryName,
       ));
+      // Positive engagement trigger
+      await ReviewService().incrementEngagement(triggerIfEligible: true);
     }
     AnalyticsService.instance.logFavoriteToggle(
       storyKey: widget.storyKey,
@@ -535,7 +538,12 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     return Column(
       children: [
         TextButton(
-          onPressed: () => setState(() => _showMoral = !_showMoral),
+          onPressed: () {
+            setState(() => _showMoral = !_showMoral);
+            if (_showMoral) {
+              ReviewService().incrementEngagement(triggerIfEligible: true);
+            }
+          },
           child: Text(
             _showMoral ? HideMoral[selectedLanguage] : ViewMoral[selectedLanguage],
             style: const TextStyle(color: Color(0xFFFFD36A)),

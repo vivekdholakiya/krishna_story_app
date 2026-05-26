@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:krishna_stories_app/services/review_service.dart';
 import '../services/app_text_data.dart';
 import '../services/audio_analytics.dart';
 import '../services/audio_service.dart';
@@ -74,11 +75,8 @@ class _SettingScreenState extends State<SettingScreen>
   }
 
   Future<void> _rateApp() async {
-    final url = Uri.parse(playStoreUrl);
     try {
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url, mode: LaunchMode.externalApplication);
-      }
+      await ReviewService().forceRequestReview();
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
