@@ -4,6 +4,8 @@ import 'package:krishna_stories_app/services/context_extensions.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/app_text_data.dart';
+import '../services/audio_analytics.dart';
+import '../services/audio_service.dart';
 import '../services/util.dart';
 import '../widgets/app_background.dart';
 import '../widgets/app_header.dart';
@@ -49,6 +51,26 @@ class _SettingScreenState extends State<SettingScreen>
             .showSnackBar(SnackBar(content: Text('Error sharing: $e')));
       }
     }
+  }
+
+  Future<void> _clearAudioCache() async {
+    final result = await AudioService.instance.clearCache();
+    AudioAnalytics.cacheCleared(
+      bytesFreed: result.bytesFreed,
+      filesCleared: result.filesCleared,
+    );
+    if (!mounted) return;
+    final msg = result.filesCleared == 0
+        ? AudioCacheEmpty[selectedLanguage]
+        : '${AudioCacheCleared[selectedLanguage]} '
+            '(${_formatBytes(result.bytesFreed)})';
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  }
+
+  String _formatBytes(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 
   Future<void> _rateApp() async {
@@ -107,6 +129,12 @@ class _SettingScreenState extends State<SettingScreen>
         title: RateApp[selectedLanguage],
         subtitle: RateUsOnTheAppStore[selectedLanguage],
         onTap: _rateApp,
+      ),
+      _SettingItem(
+        icon: Icons.delete_sweep,
+        title: ClearAudioCache[selectedLanguage],
+        subtitle: FreeUpSpaceFromDownloadedAudio[selectedLanguage],
+        onTap: _clearAudioCache,
       ),
       _SettingItem(
         icon: Icons.privacy_tip,

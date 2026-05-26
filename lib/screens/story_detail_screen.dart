@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:krishna_stories_app/services/analytics_service.dart';
+import 'package:krishna_stories_app/services/audio_analytics.dart';
+import 'package:krishna_stories_app/services/audio_manifest.dart';
+import 'package:krishna_stories_app/services/audio_service.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import '../services/app_text_data.dart';
 import '../services/favorite_service.dart';
@@ -34,7 +39,10 @@ class StoryDetailScreen extends StatefulWidget {
 }
 
 class _StoryDetailScreenState extends State<StoryDetailScreen> {
+  // Playback engines. Exactly one is active at a time; `_useSarvam` chooses.
   late FlutterTts _tts;
+  final AudioPlayer _player = AudioPlayer();
+  bool _useSarvam = false;
 
   bool _isFavorite = false;
   bool _isPlaying = false;
@@ -48,13 +56,33 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
   DateTime? _speakStart;
   Timer? _progressTimer;
 
+  late final AudioAnalytics _audioAnalytics;
+  DateTime? _playTapTime;
+  bool _lastFetchWasCacheHit = false;
+  StreamSubscription<Duration>? _posSub;
+  StreamSubscription<Duration?>? _durSub;
+  StreamSubscription<PlayerState>? _stateSub;
+  Duration? _sarvamDuration;
+
   final ScrollController _scrollController = ScrollController();
   final Set<int> _scrollMilestonesReached = {};
 
   @override
   void initState() {
     super.initState();
+    _audioAnalytics = AudioAnalytics(
+      storyKey: widget.storyKey,
+      categoryId: widget.categoryIndex + 1,
+      storyIndex: widget.storyIndex + 1,
+      lang: selectedLanguage,
+      voice: AudioManifest.instance.entryFor(widget.storyKey)?.voice ?? '',
+      playbackMode: AudioManifest.instance.hasEntry(widget.storyKey)
+          ? 'sarvam'
+          : 'tts_fallback',
+    );
+
     _initTts();
+    _initSarvamPlayer();
     _checkFav();
     _totalEstimated = _estimateDuration(_removeMoral(widget.content), _speechRate);
     _scrollController.addListener(_onScroll);
@@ -86,11 +114,61 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
 
   @override
   void dispose() {
+    // Fire 'skipped' if user left mid-playback.
+    if (_isPlaying) {
+      final pos = _useSarvam ? _player.position : _elapsed;
+      final dur = _useSarvam
+          ? (_sarvamDuration ?? Duration.zero)
+          : _totalEstimated;
+      _audioAnalytics.skipped(
+        positionSec: pos.inSeconds,
+        durationSec: dur.inSeconds,
+      );
+    }
     _tts.stop();
     _stopTimer();
+    _posSub?.cancel();
+    _durSub?.cancel();
+    _stateSub?.cancel();
+    _player.dispose();
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  // ── Sarvam (just_audio) ───────────────────────────────────────
+  void _initSarvamPlayer() {
+    _durSub = _player.durationStream.listen((d) {
+      _sarvamDuration = d;
+      if (d != null && mounted) setState(() => _totalEstimated = d);
+    });
+    _posSub = _player.positionStream.listen((pos) {
+      if (!mounted) return;
+      if (_useSarvam) {
+        setState(() => _elapsed = pos);
+        final dur = _sarvamDuration;
+        if (dur != null && dur.inSeconds > 0) {
+          _audioAnalytics.onProgress(
+            positionSec: pos.inSeconds,
+            durationSec: dur.inSeconds,
+          );
+        }
+      }
+    });
+    _stateSub = _player.playerStateStream.listen((state) {
+      if (!mounted || !_useSarvam) return;
+      if (state.processingState == ProcessingState.completed) {
+        _audioAnalytics.completed(
+          durationSec: (_sarvamDuration ?? Duration.zero).inSeconds,
+        );
+        setState(() {
+          _isPlaying = false;
+          _elapsed = _sarvamDuration ?? _elapsed;
+        });
+        _player.seek(Duration.zero);
+        _player.pause();
+      }
+    });
   }
 
   // ── TTS ────────────────────────────────────────────────────────
@@ -130,11 +208,21 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
       _speakStart = DateTime.now();
       _elapsed = Duration.zero;
       _startTimer();
-      if (mounted) setState(() { _isLoading = false; _isPlaying = true; });
+      if (mounted) {
+        setState(() { _isLoading = false; _isPlaying = true; });
+        if (_playTapTime != null) {
+          _audioAnalytics.started(
+            timeToPlayMs:
+                DateTime.now().difference(_playTapTime!).inMilliseconds,
+            cacheHit: false,
+          );
+        }
+      }
     });
     _tts.setCompletionHandler(() {
       if (!mounted) return;
       _stopTimer();
+      _audioAnalytics.completed(durationSec: _totalEstimated.inSeconds);
       setState(() {
         _isPlaying = false;
         _speakStart = null;
@@ -150,22 +238,119 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     if (mounted) setState(() => _isTtsReady = true);
   }
 
-  Future<void> _toggleTts() async {
-    if (!_isTtsReady) return;
+  Future<void> _togglePlayback() async {
     if (_isPlaying) {
-      await _tts.stop();
-      _stopTimer();
-      setState(() { _isPlaying = false; _isLoading = false; });
-    } else {
-      setState(() { _isLoading = true; _isPlaying = false; });
-      try {
-        await _tts.speak('${_removeMoral(widget.content)} ${JayShreeKrishna[selectedLanguage]}');
-        Future.delayed(const Duration(seconds: 5), () {
-          if (mounted && _isLoading && !_isPlaying) setState(() => _isLoading = false);
-        });
-      } catch (_) {
-        if (mounted) setState(() => _isLoading = false);
+      final pos = _useSarvam ? _player.position : _elapsed;
+      _audioAnalytics.paused(positionSec: pos.inSeconds);
+      if (_useSarvam) {
+        await _player.pause();
+      } else {
+        await _tts.stop();
+        _stopTimer();
       }
+      if (mounted) setState(() { _isPlaying = false; _isLoading = false; });
+      return;
+    }
+
+    // Resume from a paused sarvam stream.
+    if (_useSarvam && _player.position > Duration.zero) {
+      _audioAnalytics.resumed(positionSec: _player.position.inSeconds);
+      await _player.play();
+      if (mounted) setState(() => _isPlaying = true);
+      return;
+    }
+
+    await _startPlayback();
+  }
+
+  Future<void> _startPlayback() async {
+    _audioAnalytics.playTapped();
+    _playTapTime = DateTime.now();
+    if (mounted) setState(() { _isLoading = true; _isPlaying = false; });
+
+    // Sanskrit + langs without a Sarvam recording fall back to on-device TTS.
+    final entry = AudioManifest.instance.entryFor(widget.storyKey);
+    if (entry != null) {
+      final ok = await _playSarvam();
+      if (ok) return;
+      _audioAnalytics.ttsFallbackUsed(reason: 'download_failed');
+    } else if (selectedLanguage == 'sa') {
+      _audioAnalytics.ttsFallbackUsed(reason: 'unsupported_lang');
+    } else {
+      _audioAnalytics.ttsFallbackUsed(reason: 'no_manifest_entry');
+    }
+
+    await _speakWithTts();
+  }
+
+  Future<bool> _playSarvam() async {
+    final downloadStart = DateTime.now();
+    _audioAnalytics.downloadStarted();
+    File? file;
+    try {
+      file = await AudioService.instance.getAudio(
+        widget.storyKey,
+        onCacheHit: (hit) => _lastFetchWasCacheHit = hit,
+      );
+    } catch (_) {
+      file = null;
+    }
+
+    if (file == null) {
+      _audioAnalytics.downloadFailed(
+        errorType: 'fetch_failed',
+        errorDetail: 'getAudio returned null',
+      );
+      return false;
+    }
+
+    if (!_lastFetchWasCacheHit) {
+      try {
+        _audioAnalytics.downloadSucceeded(
+          bytes: await file.length(),
+          durationMs: DateTime.now().difference(downloadStart).inMilliseconds,
+        );
+      } catch (_) {}
+    }
+
+    try {
+      await _player.setFilePath(file.path);
+      _useSarvam = true;
+      if (!mounted) return true;
+      await _player.play();
+      _audioAnalytics.started(
+        timeToPlayMs:
+            DateTime.now().difference(_playTapTime!).inMilliseconds,
+        cacheHit: _lastFetchWasCacheHit,
+      );
+      setState(() { _isLoading = false; _isPlaying = true; });
+      return true;
+    } catch (e) {
+      _audioAnalytics.downloadFailed(
+        errorType: 'playback_failed',
+        errorDetail: e.toString(),
+      );
+      _useSarvam = false;
+      return false;
+    }
+  }
+
+  Future<void> _speakWithTts() async {
+    _useSarvam = false;
+    if (!_isTtsReady) {
+      if (mounted) setState(() => _isLoading = false);
+      return;
+    }
+    try {
+      await _tts.speak(
+          '${_removeMoral(widget.content)} ${JayShreeKrishna[selectedLanguage]}');
+      Future.delayed(const Duration(seconds: 5), () {
+        if (mounted && _isLoading && !_isPlaying) {
+          setState(() => _isLoading = false);
+        }
+      });
+    } catch (_) {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -396,7 +581,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
           )
         else
           GestureDetector(
-            onTap: _isLoading ? null : _toggleTts,
+            onTap: _isLoading ? null : _togglePlayback,
             child: Icon(
               _isPlaying ? Icons.pause : Icons.play_arrow,
               color: const Color(0xFFFFD36A),

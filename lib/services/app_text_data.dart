@@ -226,6 +226,30 @@ const Map ReadTermsAndConditions = {
   'hu': 'ऐप उपयोग की शर्तें और नियम पढ़ें',
   'sa': 'अनुप्रयोगोपयोगाय नियमशर्ताः पठन्तु'
 };
+const Map ClearAudioCache = {
+  'en': 'Clear Audio Cache',
+  'gu': 'ઓડિયો કેશ સાફ કરો',
+  'hu': 'ऑडियो कैश साफ़ करें',
+  'sa': 'श्रव्यसञ्चयं रिक्तीकुर्वन्तु'
+};
+const Map FreeUpSpaceFromDownloadedAudio = {
+  'en': 'Free up space from downloaded story audio',
+  'gu': 'ડાઉનલોડ કરેલા વાર્તા ઓડિયોમાંથી જગ્યા ખાલી કરો',
+  'hu': 'डाउनलोड किए गए कथा ऑडियो से जगह खाली करें',
+  'sa': 'अवतीर्णकथाश्रव्येभ्यः स्थानं मोचयन्तु'
+};
+const Map AudioCacheCleared = {
+  'en': 'Audio cache cleared',
+  'gu': 'ઓડિયો કેશ સાફ કરવામાં આવી',
+  'hu': 'ऑडियो कैश साफ़ कर दिया गया',
+  'sa': 'श्रव्यसञ्चयः रिक्तीकृतः'
+};
+const Map AudioCacheEmpty = {
+  'en': 'No cached audio to clear',
+  'gu': 'સાફ કરવા માટે કોઈ કેશ ઓડિયો નથી',
+  'hu': 'साफ़ करने के लिए कोई कैश ऑडियो नहीं है',
+  'sa': 'रिक्तीकर्तुं कश्चन सञ्चयः नास्ति'
+};
 const Map Krishna = {
   'en': 'Krishna',
   'gu': 'કૃષ્ણ',
