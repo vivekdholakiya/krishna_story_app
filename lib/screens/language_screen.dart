@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/services/ads.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/analytics_service.dart';
 import '../services/app_text_data.dart';
 import '../services/favorite_service.dart';
 import '../services/util.dart';
@@ -24,18 +25,26 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   }
 
   Future<void> _selectLanguage(String language) async {
+    final fromLang = selectedLanguage;
+    final toLang = languageCodes[language]!;
 
-
-    selectedLanguage = languageCodes[language]!;
+    selectedLanguage = toLang;
     selectedJsonFile = languageFiles[language]!;
     cachedCategories = null;
     cachedStoryDetails = null;
 
     final prefs = await SharedPreferences.getInstance();
+    final isFirstSelection = prefs.getBool('isFirstTime') ?? true;
     await prefs.setBool('isFirstTime', false);
     await prefs.setString('selectedLanguage', selectedLanguage);
     await prefs.setString('selectedJsonFile', selectedJsonFile);
     await FavoriteService.clearAllFavorites();
+
+    AnalyticsService.instance.logLanguageChange(
+      fromLang: fromLang,
+      toLang: toLang,
+      isFirstSelection: isFirstSelection,
+    );
 
     if (!mounted) return;
 

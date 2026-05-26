@@ -49,6 +49,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
   Timer? _progressTimer;
 
   final ScrollController _scrollController = ScrollController();
+  final Set<int> _scrollMilestonesReached = {};
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     _initTts();
     _checkFav();
     _totalEstimated = _estimateDuration(_removeMoral(widget.content), _speechRate);
+    _scrollController.addListener(_onScroll);
 
     AnalyticsService.instance.logScreenView(
       screenName: 'StoryDetail',
@@ -63,10 +65,30 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
     );
   }
 
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    final max = _scrollController.position.maxScrollExtent;
+    if (max <= 0) return; // story too short to scroll
+    final pct = (_scrollController.offset / max * 100).clamp(0, 100).toInt();
+    for (final milestone in [25, 50, 75, 100]) {
+      if (pct >= milestone && !_scrollMilestonesReached.contains(milestone)) {
+        _scrollMilestonesReached.add(milestone);
+        AnalyticsService.instance.logStoryScroll(
+          storyKey: widget.storyKey,
+          categoryIndex: widget.categoryIndex,
+          storyIndex: widget.storyIndex,
+          lang: selectedLanguage,
+          milestone: milestone,
+        );
+      }
+    }
+  }
+
   @override
   void dispose() {
     _tts.stop();
     _stopTimer();
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }
@@ -185,6 +207,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
   }
 
   Future<void> _toggleFav() async {
+    final willAdd = !_isFavorite;
     if (_isFavorite) {
       await FavoriteService.removeFromFavorites(widget.storyKey);
     } else {
@@ -197,6 +220,13 @@ class _StoryDetailScreenState extends State<StoryDetailScreen> {
         categoryName: widget.categoryName,
       ));
     }
+    AnalyticsService.instance.logFavoriteToggle(
+      storyKey: widget.storyKey,
+      categoryIndex: widget.categoryIndex,
+      storyIndex: widget.storyIndex,
+      lang: selectedLanguage,
+      added: willAdd,
+    );
     if (mounted) setState(() => _isFavorite = !_isFavorite);
   }
 

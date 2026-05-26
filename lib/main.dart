@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -23,7 +24,16 @@ Future<void> main() async {
 
   await MobileAds.instance.initialize();
   AdsControllerMain.markMobileAdsInitialized();
-  runApp(const MyApp());
+
+  final clarityConfig = ClarityConfig(
+    projectId: "wx1ok2wbi6",
+    logLevel: LogLevel.None,
+  );
+
+  runApp(ClarityWidget(
+    app: const MyApp(),
+    clarityConfig: clarityConfig,
+  ));
 }
 
 class MyApp extends StatefulWidget {

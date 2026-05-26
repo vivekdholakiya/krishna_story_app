@@ -1,0 +1,6 @@
+audio_out/
+audition/
+.progress.json
+.env
+__pycache__/
+*.pyc
