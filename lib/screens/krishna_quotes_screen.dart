@@ -56,7 +56,7 @@ class _KrishnaQuotesScreenState extends State<KrishnaQuotesScreen>
               'id': key,
               'en': value['en'] ?? '',
               'gu': value['gu'] ?? '',
-              'hu': value['hn'] ?? '',
+              'hu': value['hu'] ?? '',
               'sa': value['sa'] ?? '',
             });
           }
@@ -80,6 +80,7 @@ class _KrishnaQuotesScreenState extends State<KrishnaQuotesScreen>
       'hu': '- भगवान श्री कृष्ण',
       'sa': '- श्रीकृष्णः',
     };
+
     final text = quote[selectedLanguage] ?? quote['en'];
     final suffix = suffixMap[selectedLanguage] ?? '- Lord Krishna';
     final shareText = '$text $suffix\n\n${shareDes[selectedLanguage]}\n\n$playStoreUrl';
