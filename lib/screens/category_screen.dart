@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import '../model/caregory_model.dart';
+import '../services/analytics_service.dart';
 import '../services/app_text_data.dart';
 import '../services/util.dart';
 import '../widgets/app_background.dart';
@@ -23,6 +25,7 @@ class _CategoryScreenState extends State<CategoryScreen>
   late AnimationController _fadeController;
   String _searchQuery = '';
   bool _isLoading = true;
+  Timer? _searchDebounce;
 
   @override
   void initState() {
@@ -34,8 +37,22 @@ class _CategoryScreenState extends State<CategoryScreen>
 
   @override
   void dispose() {
+    _searchDebounce?.cancel();
     _fadeController.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged(String v) {
+    setState(() => _searchQuery = v);
+    _searchDebounce?.cancel();
+    if (v.trim().isEmpty) return;
+    _searchDebounce = Timer(const Duration(milliseconds: 700), () {
+      AnalyticsService.instance.logSearch(
+        query: v,
+        resultCount: _filtered.length,
+        lang: selectedLanguage,
+      );
+    });
   }
 
   Future<void> _loadData() async {
@@ -124,7 +141,7 @@ class _CategoryScreenState extends State<CategoryScreen>
         ),
         child: TextField(
           style: const TextStyle(color: Colors.white),
-          onChanged: (v) => setState(() => _searchQuery = v),
+          onChanged: _onSearchChanged,
           decoration: InputDecoration(
             hintText: searchHint[selectedLanguage],
             hintStyle: TextStyle(
@@ -169,17 +186,24 @@ class _CategoryScreenState extends State<CategoryScreen>
       builder: (_, v, child) =>
           Transform.scale(scale: v, child: Opacity(opacity: v, child: child)),
       child: GestureDetector(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => StoriesListScreen(
-              category: category,
-              colors: const [Color(0xFF3A7BD5), Color(0xFF1E3C72)],
-              categoryIndex: index,
-              storyDetails: cachedStoryDetails ?? {},
+        onTap: () {
+          AnalyticsService.instance.logCategoryTap(
+            categoryIndex: index,
+            categoryName: category.category,
+            lang: selectedLanguage,
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => StoriesListScreen(
+                category: category,
+                colors: const [Color(0xFF3A7BD5), Color(0xFF1E3C72)],
+                categoryIndex: index,
+                storyDetails: cachedStoryDetails ?? {},
+              ),
             ),
-          ),
-        ),
+          );
+        },
         child: Column(
           children: [
             Container(

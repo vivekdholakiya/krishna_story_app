@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import '../services/ads.dart';
+import '../services/analytics_service.dart';
 import '../services/app_text_data.dart';
 import '../services/util.dart';
 import '../widgets/app_background.dart';
@@ -59,6 +60,15 @@ class _StoriesListScreenState extends State<StoriesListScreen>
   bool get _isLocked => false; // first 3 free, rest locked — logic below
 
   void _openStory(int index, String title, String content, String key) {
+    final wasAdGated = index > 2;
+    AnalyticsService.instance.logStoryTap(
+      storyKey: key,
+      categoryIndex: widget.categoryIndex,
+      storyIndex: index,
+      lang: selectedLanguage,
+      wasAdGated: wasAdGated,
+    );
+
     void navigate() => Navigator.push(
           context,
           MaterialPageRoute(
@@ -74,7 +84,7 @@ class _StoriesListScreenState extends State<StoriesListScreen>
           ),
         );
 
-    if (index > 2) {
+    if (wasAdGated) {
       adsControllerVar.showRewardedAd(context, onRewardGranted: navigate);
     } else {
       navigate();

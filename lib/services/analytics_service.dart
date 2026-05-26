@@ -69,5 +69,103 @@ class AnalyticsService {
       },
     );
   }
+
+  /// Generic event logger for ad-hoc events (e.g. audio playback analytics).
+  /// Firebase requires parameter values to be String, num, or bool — nulls are dropped.
+  Future<void> logCustomEvent(String name, Map<String, Object?> params) {
+    final cleaned = <String, Object>{};
+    params.forEach((k, v) {
+      if (v != null) cleaned[k] = v;
+    });
+    return _analytics.logEvent(name: name, parameters: cleaned);
+  }
+
+  // ── Navigation & engagement events ─────────────────────────────────
+
+  Future<void> logCategoryTap({
+    required int categoryIndex,
+    required String categoryName,
+    required String lang,
+  }) {
+    return logCustomEvent('category_tap', {
+      'category_id': categoryIndex + 1,
+      'category_name': categoryName,
+      'lang': lang,
+    });
+  }
+
+  Future<void> logStoryTap({
+    required String storyKey,
+    required int categoryIndex,
+    required int storyIndex,
+    required String lang,
+    required bool wasAdGated,
+  }) {
+    return logCustomEvent('story_tap', {
+      'story_key': storyKey,
+      'category_id': categoryIndex + 1,
+      'story_index': storyIndex + 1,
+      'lang': lang,
+      'was_ad_gated': wasAdGated,
+    });
+  }
+
+  Future<void> logLanguageChange({
+    required String fromLang,
+    required String toLang,
+    required bool isFirstSelection,
+  }) {
+    return logCustomEvent('language_change', {
+      'from_lang': fromLang,
+      'to_lang': toLang,
+      'is_first_selection': isFirstSelection,
+    });
+  }
+
+  Future<void> logFavoriteToggle({
+    required String storyKey,
+    required int categoryIndex,
+    required int storyIndex,
+    required String lang,
+    required bool added, // true = added, false = removed
+  }) {
+    return logCustomEvent('favorite_toggle', {
+      'story_key': storyKey,
+      'category_id': categoryIndex + 1,
+      'story_index': storyIndex + 1,
+      'lang': lang,
+      'added': added,
+    });
+  }
+
+  Future<void> logSearch({
+    required String query,
+    required int resultCount,
+    required String lang,
+  }) {
+    return logCustomEvent('search', {
+      // Truncate to 100 chars so we don't blow Firebase's param size limit
+      // and don't store anything sensitive if user types weird input.
+      'query': query.length > 100 ? query.substring(0, 100) : query,
+      'query_length': query.length,
+      'result_count': resultCount,
+      'lang': lang,
+    });
+  }
+
+  Future<void> logStoryScroll({
+    required String storyKey,
+    required int categoryIndex,
+    required int storyIndex,
+    required String lang,
+    required int milestone, // 25, 50, 75, 100
+  }) {
+    return logCustomEvent('story_scroll_$milestone', {
+      'story_key': storyKey,
+      'category_id': categoryIndex + 1,
+      'story_index': storyIndex + 1,
+      'lang': lang,
+    });
+  }
 }
 

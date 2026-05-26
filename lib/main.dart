@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:krishna_stories_app/services/audio_manifest.dart';
 import 'package:krishna_stories_app/services/network_manager.dart';
 import 'package:krishna_stories_app/services/util.dart' show selectedLanguage;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +45,19 @@ Future<void> main() async {
   await reviewService.initialize();
 
   runApp(const MyApp());
+
+  // Kick off manifest load — non-blocking so splash isn't delayed by network.
+  AudioManifest.instance.load();
+
+  final clarityConfig = ClarityConfig(
+    projectId: "wx1ok2wbi6",
+    logLevel: LogLevel.None,
+  );
+
+  runApp(ClarityWidget(
+    app: const MyApp(),
+    clarityConfig: clarityConfig,
+  ));
 }
 
 class MyApp extends StatefulWidget {
