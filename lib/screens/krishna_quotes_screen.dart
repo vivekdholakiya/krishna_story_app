@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/services/ads.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
+import 'package:krishna_stories_app/services/review_service.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/app_text_data.dart';
@@ -94,10 +95,16 @@ class _KrishnaQuotesScreenState extends State<KrishnaQuotesScreen>
 
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('tapCount', _tapCount);
+
+    // Increment user engagement to trigger smart in-app review
+    await ReviewService().incrementEngagement(triggerIfEligible: true);
   }
 
   void _copyQuote(String text) {
     Clipboard.setData(ClipboardData(text: text));
+    
+    // Increment user engagement to trigger smart in-app review
+    ReviewService().incrementEngagement(triggerIfEligible: true);
   }
 
   @override
@@ -113,6 +120,7 @@ class _KrishnaQuotesScreenState extends State<KrishnaQuotesScreen>
                   opacity: _fadeController,
                   child: AppHeader(title: KrishnaQuotes[selectedLanguage]),
                 ),
+
                 Expanded(child: _buildList()),
               ],
             ),

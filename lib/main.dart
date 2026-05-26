@@ -4,8 +4,13 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:krishna_stories_app/services/network_manager.dart';
+import 'package:krishna_stories_app/services/util.dart' show selectedLanguage;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/splash_screen.dart';
 import 'services/ads.dart';
+import 'services/notification_service.dart';
+
+import 'services/review_service.dart';
 
 final internetService = InternetService();
 final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
@@ -18,11 +23,25 @@ const firebaseOptions = FirebaseOptions(
 );
 
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  
+  final prefs = await SharedPreferences.getInstance();
+
+  selectedLanguage = prefs.getString('selectedLanguage') ?? 'en';
+
   await Firebase.initializeApp(options: firebaseOptions);
 
   await MobileAds.instance.initialize();
+
   AdsControllerMain.markMobileAdsInitialized();
+
+  final notificationService = NotificationService();
+  await notificationService.initialize();
+
+  final reviewService = ReviewService();
+  await reviewService.initialize();
+
   runApp(const MyApp());
 }
 

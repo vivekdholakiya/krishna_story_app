@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/screens/setting_screen.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import 'package:krishna_stories_app/services/analytics_service.dart';
+import '../model/krishna_quote.dart';
 import '../services/ads.dart';
 import '../services/app_text_data.dart';
 import '../services/util.dart';
@@ -10,6 +12,11 @@ import '../widgets/app_background.dart';
 import 'category_screen.dart';
 import 'favorites_screen.dart';
 import 'krishna_quotes_screen.dart';
+import 'dart:ui' as ui;
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+
 
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({super.key});
@@ -22,12 +29,16 @@ class _MainHomeScreenState extends State<MainHomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fade;
+  final GlobalKey _quoteCardKey = GlobalKey();
+
+  // ── NEW ──────────────────────────────────────────
+  KrishnaQuote? _dailyQuote;
 
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 800), vsync: this);
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
@@ -38,13 +49,33 @@ class _MainHomeScreenState extends State<MainHomeScreen>
 
     adsControllerVar.loadInterstitialAd();
     adsControllerVar.loadRewardedAd();
+    _loadDailyQuote(); // ── NEW
   }
 
+  // ── NEW ──────────────────────────────────────────
+  Future<void> _loadDailyQuote() async {
+    try {
+      final String jsonString =
+      await rootBundle.loadString('assets/krishnaQuotes2.json');
+      final KrishnaQuotesContainer container =
+      KrishnaQuotesContainer.parseJsonString(jsonString);
+      if (container.quotes.isNotEmpty) {
+        // Use today's date as seed so same quote shows all day
+        final int todayIndex =
+            DateTime.now().dayOfYear % container.quotes.length;
+        setState(() => _dailyQuote = container.quotes[todayIndex]);
+      }
+    } catch (e) {
+      debugPrint('Failed to load daily quote: $e');
+    }
+  }
+  // ─────────────────────────────────────────────────
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +89,8 @@ class _MainHomeScreenState extends State<MainHomeScreen>
               child: Column(
                 children: [
                   _buildHeader(),
+                  if (_dailyQuote != null) _buildDailyQuoteCard(), // ── NEW
+                  SizedBox(height: context.responsiveSize(10)),
                   Expanded(child: _buildOptions()),
                 ],
               ),
@@ -201,6 +234,184 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       ),
     );
   }
+
+
+
+  Widget _buildDailyQuoteCard() {
+    final quote = _dailyQuote!;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: context.responsiveSize(18),
+        vertical: context.responsiveSize(8),
+      ),
+      child: RepaintBoundary(
+        key: _quoteCardKey,
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF0B1A3A), Color(0xFF102C5A)],
+            ),
+            borderRadius: BorderRadius.circular(context.responsiveSize(20)),
+            border: Border.all(
+              color: const Color(0xFFFFD36A).withOpacity(0.45),
+              width: 1.5,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+              // ── Header ────────────────────────────
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveSize(14),
+                  vertical: context.responsiveSize(10),
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFD36A).withOpacity(0.07),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(context.responsiveSize(20)),
+                  ),
+                  border: Border(
+                    bottom: BorderSide(
+                      color: const Color(0xFFFFD36A).withOpacity(0.2),
+                    ),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.auto_awesome,
+                        color: const Color(0xFFFFD36A),
+                        size: context.responsiveSize(15)),
+                    SizedBox(width: context.responsiveSize(6)),
+                    Text(
+                      DailyQuote[selectedLanguage] ?? 'Daily Quote',
+                      style: TextStyle(
+                        fontSize: context.responsiveFontSize(12),
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFFFFD36A),
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    const Spacer(),
+                    // Share button
+                    GestureDetector(
+                      onTap: _shareQuoteCard,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.responsiveSize(10),
+                          vertical: context.responsiveSize(5),
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFFD36A), Color(0xFFFFB700)],
+                          ),
+                          borderRadius:
+                          BorderRadius.circular(context.responsiveSize(20)),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.share,
+                                color: const Color(0xFF0B1A3A),
+                                size: context.responsiveSize(13)),
+                            SizedBox(width: context.responsiveSize(4)),
+                            Text(
+                              Share_text[selectedLanguage] ?? 'Share',
+                              style: TextStyle(
+                                fontSize: context.responsiveFontSize(11),
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF0B1A3A),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ── Quote body ────────────────────────
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveSize(16),
+                  vertical: context.responsiveSize(12),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      '"${quote.displayQuote}"',
+                      style: TextStyle(
+                        fontSize: context.responsiveFontSize(13),
+                        color: Colors.white,
+                        height: 1.65,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    // Sanskrit line (always show if available)
+                    if (quote.sanskrit.isNotEmpty) ...[
+                      SizedBox(height: context.responsiveSize(10)),
+                      Container(
+                        width: context.responsiveSize(36),
+                        height: 1,
+                        color: const Color(0xFFFFD36A).withOpacity(0.4),
+                      ),
+                      SizedBox(height: context.responsiveSize(8)),
+                      Text(
+                        quote.sanskrit,
+                        style: TextStyle(
+                          fontSize: context.responsiveFontSize(11),
+                          color: const Color(0xFFFFD36A).withOpacity(0.6),
+                          height: 1.5,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Future<void> _shareQuoteCard() async {
+    try {
+      final RenderRepaintBoundary boundary = _quoteCardKey.currentContext!
+          .findRenderObject() as RenderRepaintBoundary;
+
+      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      final ByteData? byteData =
+      await image.toByteData(format: ui.ImageByteFormat.png);
+      if (byteData == null) return;
+
+      final Uint8List pngBytes = byteData.buffer.asUint8List();
+      final Directory tempDir = await getTemporaryDirectory();
+      final File file = File('${tempDir.path}/krishna_daily_quote.png');
+      await file.writeAsBytes(pngBytes);
+
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: '🙏 ${_dailyQuote?.displayQuote ?? ''}\n\nKrishna: The Eternal Story',
+      );
+    } catch (e) {
+      debugPrint('Share error: $e');
+    }
+  }
+
+
 }
 
 class _Option {
@@ -214,3 +425,5 @@ class _Option {
       required this.subtitle,
       required this.onTap});
 }
+
+

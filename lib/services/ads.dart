@@ -188,7 +188,6 @@ class AdsControllerMain {
   bool _isRewardedLoading = false;
 
   Future<void> loadRewardedAd() async {
-    print("load Ads123 RewardedAd");
     if (!await _ensureMobileAdsReady()) return;
     if (_isRewardedReady || _isRewardedLoading) return;
     _isRewardedLoading = true;
