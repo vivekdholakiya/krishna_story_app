@@ -446,9 +446,12 @@ def encode_opus(wav_path: Path, bitrate: str = "24k") -> Path | None:
     tmp = opus_path.with_suffix(".opus.tmp")
     try:
         subprocess.run(
+            # Force the ogg container with -f ogg: the .opus.tmp extension
+            # isn't recognized by ffmpeg's muxer auto-detection, so without
+            # this it errors with "Unable to choose an output format".
             ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
              "-c:a", "libopus", "-b:a", bitrate, "-ac", "1",
-             "-application", "voip", str(tmp)],
+             "-application", "voip", "-f", "ogg", str(tmp)],
             check=True, capture_output=True,
         )
         tmp.replace(opus_path)
