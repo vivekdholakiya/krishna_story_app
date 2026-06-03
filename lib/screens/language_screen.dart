@@ -38,6 +38,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
     await prefs.setBool('isFirstTime', false);
     await prefs.setString('selectedLanguage', selectedLanguage);
     await prefs.setString('selectedJsonFile', selectedJsonFile);
+
     await FavoriteService.clearAllFavorites();
 
     AnalyticsService.instance.logLanguageChange(
@@ -129,7 +130,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           Image.asset('assets/images/change_lng.png',
               height: context.responsiveSize(230), fit: BoxFit.contain),
           SizedBox(height: context.responsiveSize(14)),
-          Text(chooseYourLanguage[selectedLanguage],
+          Text(chooseYourLanguage["en"],
               style: TextStyle(
                   fontSize: context.responsiveFontSize(26),
                   fontWeight: FontWeight.bold,

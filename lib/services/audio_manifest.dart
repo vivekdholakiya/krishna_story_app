@@ -9,16 +9,16 @@ import 'package:path_provider/path_provider.dart';
 /// Resolves story keys to Sarvam-generated audio URLs hosted on Cloudflare R2.
 ///
 /// Loading order:
-///   1. Disk cache (`<docs>/audio_manifest.json`) — from a prior session.
+///   1. Disk cache (`<docs>/audio_manifest.json.json`) — from a prior session.
 ///   2. Network refresh from R2 (best-effort, in background).
-///   3. Bundled asset (`assets/audio_manifest.json`) — last-resort fallback so
+///   3. Bundled asset (`assets/audio_manifest.json.json`) — last-resort fallback so
 ///      the app works on first launch with no network.
 class AudioManifest {
   AudioManifest._();
   static final AudioManifest instance = AudioManifest._();
 
   static const String _remoteUrl =
-      'https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/audio_manifest.json';
+      'https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/audio_manifest.json.json';
   static const String _bundledAsset = 'assets/audio_manifest.json';
   static const String _cachedFileName = 'audio_manifest.json';
   static const Duration _httpTimeout = Duration(seconds: 8);

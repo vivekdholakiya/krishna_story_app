@@ -38,8 +38,8 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _init() async {
     final prefs = await SharedPreferences.getInstance();
     _isFirstTime = prefs.getBool('isFirstTime') ?? true;
-    selectedLanguage = prefs.getString('selectedLanguage') ?? 'en';
-    selectedJsonFile = prefs.getString('selectedJsonFile') ?? 'krishna_story_category_english.json';
+    selectedLanguage = prefs.getString('selectedLanguage') ?? 'hu';
+    selectedJsonFile = prefs.getString('selectedJsonFile') ?? 'krishna_story_category_hindi.json';
     if (mounted) setState(() {});
 
     await Future.delayed(const Duration(milliseconds: 3000));
@@ -49,7 +49,8 @@ class _SplashScreenState extends State<SplashScreen>
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 800),
         pageBuilder: (_, __, ___) =>
-            _isFirstTime ? LanguageSelectionScreen(isBack: false) : MainHomeScreen(),
+            // _isFirstTime ? LanguageSelectionScreen(isBack: false) :
+            MainHomeScreen(),
         transitionsBuilder: (_, anim, __, child) =>
             FadeTransition(opacity: anim, child: child),
       ),

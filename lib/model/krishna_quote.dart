@@ -39,7 +39,6 @@ class KrishnaQuote {
   /// Helper to get a clean visual format of the quote.
   /// Prefers English, but falls back to other available languages.
   String get displayQuote {
-    print("object==== $selectedLanguage");
     switch (selectedLanguage) {
       case 'en':
         return english.isNotEmpty  ? english   : _fallback;

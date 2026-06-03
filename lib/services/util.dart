@@ -16,7 +16,7 @@ const Map<String, String> languageCodes = {
 };
 
 String selectedLanguage = 'en';
-String selectedJsonFile = 'krishna_story_category_english.json';
+String selectedJsonFile = 'krishna_story_category_hindi.json';
 
 // ── URLs ─────────────────────────────────────────────────────────
 const String playStoreUrl =
@@ -35,16 +35,22 @@ const String rewardedAdId = 'ca-app-pub-3940256099942544/5224354917';
 const String bannerAdId = 'ca-app-pub-3940256099942544/6300978111';
 
 // ── Data Cache ───────────────────────────────────────────────────
-// Cached so CategoryScreen doesn't re-parse JSON on every visit.
 List<StoryCategory>? cachedCategories;
 Map<String, dynamic>? cachedStoryDetails;
 
-const int targetHour = 20;
-const int targetMinute = 30;
 
-// utils માં add કરો
+const String keyNotificationsEnabled = 'notif_enabled';
+const String keyNotificationHour = 'notif_hour';
+const String keyNotificationMinute = 'notif_minute';
+
+const int defaultNotifHour = 9;
+const int defaultNotifMinute = 30;
+
+
 extension DateTimeExt on DateTime {
   int get dayOfYear {
     return difference(DateTime(year, 1, 1)).inDays;
   }
 }
+
+
