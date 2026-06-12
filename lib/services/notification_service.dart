@@ -172,7 +172,7 @@ class NotificationService {
           name: 'NotificationService',
         );
 
-        if (canScheduleExact) return AndroidScheduleMode.exactAllowWhileIdle;
+        if (canScheduleExact) return AndroidScheduleMode.inexactAllowWhileIdle;
       }
     } catch (e) {
       developer.log(

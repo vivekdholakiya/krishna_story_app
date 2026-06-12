@@ -71,8 +71,6 @@ class _CategoryScreenState extends State<CategoryScreen>
       final detailJson =
           await rootBundle.loadString('assets/krishna_story_detail.json');
 
-      print("detailJson");
-      print(detailJson);
       final catData = json.decode(catJson) as Map<String, dynamic>;
       final detailData = json.decode(detailJson) as Map<String, dynamic>;
 

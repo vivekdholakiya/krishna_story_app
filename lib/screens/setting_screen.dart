@@ -235,7 +235,7 @@ class _SettingScreenState extends State<SettingScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Daily Notification',
+                          DailyNotification[selectedLanguage],
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: context.responsiveFontSize(18),
@@ -243,7 +243,7 @@ class _SettingScreenState extends State<SettingScreen>
                         ),
                         SizedBox(height: context.responsiveSize(4)),
                         Text(
-                          'Receive daily Krishna quotes',
+                          ReceiveDailyKrishnaQuotes[selectedLanguage],
                           style: TextStyle(
                               color: Colors.white70,
                               fontSize: context.responsiveFontSize(13)),
@@ -298,7 +298,7 @@ class _SettingScreenState extends State<SettingScreen>
                               CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Notification Time',
+                                  NotificationTime[selectedLanguage],
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize:
@@ -308,7 +308,7 @@ class _SettingScreenState extends State<SettingScreen>
                                 SizedBox(
                                     height: context.responsiveSize(4)),
                                 Text(
-                                  'Tap to change time',
+                                    TapToChangeTime[selectedLanguage],
                                   style: TextStyle(
                                       color: Colors.white70,
                                       fontSize:

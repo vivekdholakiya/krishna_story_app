@@ -690,22 +690,6 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
                   });
                 }
               },
-              //
-              // onTap: () {
-              //   setState(() => _showMoral = !_showMoral);
-              //
-              //   if (_showMoral) {
-              //     ReviewService().incrementEngagement(triggerIfEligible: true);
-              //
-              //     WidgetsBinding.instance.addPostFrameCallback((_) {
-              //       if (_scrollController.hasClients) {
-              //         _scrollController.jumpTo(
-              //           _scrollController.position.maxScrollExtent,
-              //         );
-              //       }
-              //     });
-              //   }
-              // },
 
               child: Ink(
                 padding: EdgeInsets.symmetric(
