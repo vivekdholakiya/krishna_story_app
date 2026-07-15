@@ -72,8 +72,7 @@ class ReviewService {
     }
   }
 
-  /// Evaluates whether the app is eligible to ask the user for a review.
-  /// Follows strict Google Play guidelines.
+
   Future<bool> shouldAskForReview() async {
     try {
       final prefs = await SharedPreferences.getInstance();

@@ -80,8 +80,6 @@ class NotificationService {
         onDidReceiveNotificationResponse: _onDidReceiveNotification,
       );
 
-      developer.log('Flutter Local Notifications Plugin Initialized successfully', name: 'NotificationService');
-
       await requestPermissions();
       await scheduleDailyQuotes();
     } catch (e, stacktrace) {
@@ -112,9 +110,6 @@ class NotificationService {
         androidGranted =
             await androidImplementation.requestNotificationsPermission() ?? false;
 
-        // ── NEW: Request exact alarm permission on Android 12+ ──────────────
-        // This opens the system settings screen where the user can grant
-        // "Alarms & Reminders" permission. Without it, exactAllowWhileIdle throws.
         final bool? exactAlarmGranted =
         await androidImplementation.requestExactAlarmsPermission();
         developer.log(
@@ -127,6 +122,7 @@ class NotificationService {
           'Android notification permission status: $androidGranted',
           name: 'NotificationService',
         );
+
       }
 
 
@@ -152,11 +148,6 @@ class NotificationService {
     return _fallbackQuotesJson.map((item) => KrishnaQuote.fromJson(item)).toList();
   }
 
-  /// Resolves the best available AndroidScheduleMode for this device.
-  /// - Tries exactAllowWhileIdle first (most reliable).
-  /// - Falls back to inexactAllowWhileIdle if exact alarms are not permitted.
-  ///   Inexact alarms are delivered within a ~15-minute window but don't need
-  ///   the SCHEDULE_EXACT_ALARM permission.
   Future<AndroidScheduleMode> _resolveScheduleMode() async {
     try {
       final AndroidFlutterLocalNotificationsPlugin? androidImpl =
@@ -167,18 +158,11 @@ class NotificationService {
         final bool canScheduleExact =
             await androidImpl.canScheduleExactNotifications() ?? false;
 
-        developer.log(
-          'canScheduleExactNotifications: $canScheduleExact',
-          name: 'NotificationService',
-        );
 
         if (canScheduleExact) return AndroidScheduleMode.inexactAllowWhileIdle;
       }
     } catch (e) {
-      developer.log(
-        'Error checking exact alarm capability, falling back to inexact: $e',
-        name: 'NotificationService',
-      );
+
     }
 
     // Safe fallback — works without any special permission
