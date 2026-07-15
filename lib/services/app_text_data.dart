@@ -250,6 +250,37 @@ const Map AudioCacheEmpty = {
   'hu': 'साफ़ करने के लिए कोई कैश ऑडियो नहीं है',
   'sa': 'रिक्तीकर्तुं कश्चन सञ्चयः नास्ति'
 };
+
+
+
+const Map DailyNotification = {
+  'en': 'Daily Notification',
+  'gu': 'દૈનિક સૂચના',
+  'hu': 'दैनिक सूचना',
+  'sa': 'दैनिक अधिसूचना'
+};
+
+const Map ReceiveDailyKrishnaQuotes = {
+  'en': 'Receive daily Krishna quotes',
+  'gu': 'દરરોજ શ્રીકૃષ્ણના સુવાક્યો મેળવો',
+  'hu': 'प्रतिदिन श्रीकृष्ण के प्रेरणादायक विचार प्राप्त करें',
+  'sa': 'प्रतिदिनं श्रीकृष्णस्य प्रेरणादायकवचनानि प्राप्नुत'
+};
+
+const Map NotificationTime = {
+  'en': 'Notification Time',
+  'gu': 'સૂચનાનો સમય',
+  'hu': 'सूचना का समय',
+  'sa': 'अधिसूचनासमयः'
+};
+
+const Map TapToChangeTime = {
+  'en': 'Tap to change time',
+  'gu': 'સમય બદલવા માટે ટેપ કરો',
+  'hu': 'समय बदलने के लिए टैप करें',
+  'sa': 'समयं परिवर्तयितुं स्पृशतु'
+};
+
 const Map Krishna = {
   'en': 'Krishna',
   'gu': 'કૃષ્ણ',

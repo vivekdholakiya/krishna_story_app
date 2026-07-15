@@ -25,12 +25,11 @@ const firebaseOptions = FirebaseOptions(
 );
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final prefs = await SharedPreferences.getInstance();
 
-  selectedLanguage = prefs.getString('selectedLanguage') ?? 'en';
+  selectedLanguage = prefs.getString('selectedLanguage') ?? 'hu';
 
   await Firebase.initializeApp(options: firebaseOptions);
 
@@ -46,7 +45,6 @@ Future<void> main() async {
 
   runApp(const MyApp());
 
-  // Kick off manifest load — non-blocking so splash isn't delayed by network.
   AudioManifest.instance.load();
 
   final clarityConfig = ClarityConfig(
@@ -54,10 +52,7 @@ Future<void> main() async {
     logLevel: LogLevel.None,
   );
 
-  runApp(ClarityWidget(
-    app: const MyApp(),
-    clarityConfig: clarityConfig,
-  ));
+  runApp(ClarityWidget(app: const MyApp(), clarityConfig: clarityConfig));
 }
 
 class MyApp extends StatefulWidget {

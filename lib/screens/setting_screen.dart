@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:krishna_stories_app/services/context_extensions.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:krishna_stories_app/services/review_service.dart';
+import 'package:krishna_stories_app/services/notification_service.dart';
 import '../services/app_text_data.dart';
 import '../services/audio_analytics.dart';
 import '../services/audio_service.dart';
@@ -26,13 +27,65 @@ class _SettingScreenState extends State<SettingScreen>
   late AnimationController _controller;
   late Animation<double> _fade;
 
+  bool _notifEnabled = true;
+  int _notifHour = defaultNotifHour;
+  int _notifMinute = defaultNotifMinute;
+
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 800), vsync: this);
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
+    _loadNotifPrefs();
+  }
+
+  Future<void> _loadNotifPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _notifEnabled = prefs.getBool(keyNotificationsEnabled) ?? true;
+      _notifHour = prefs.getInt(keyNotificationHour) ?? defaultNotifHour;
+      _notifMinute = prefs.getInt(keyNotificationMinute) ?? defaultNotifMinute;
+    });
+  }
+
+  Future<void> _saveNotifPrefs() async {
+    await NotificationService().saveAndReschedule(
+      enabled: _notifEnabled,
+      hour: _notifHour,
+      minute: _notifMinute,
+    );
+  }
+
+  Future<void> _pickTime() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: _notifHour, minute: _notifMinute),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.dark().copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: Color(0xFFFFD36A),
+              onPrimary: Colors.black,
+              surface: Color(0xFF1E293B),
+              onSurface: Colors.white,
+            ),
+            timePickerTheme: const TimePickerThemeData(
+              backgroundColor: Color(0xFF1E293B),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      setState(() {
+        _notifHour = picked.hour;
+        _notifMinute = picked.minute;
+      });
+      await _saveNotifPrefs();
+    }
   }
 
   @override
@@ -54,26 +107,6 @@ class _SettingScreenState extends State<SettingScreen>
     }
   }
 
-  Future<void> _clearAudioCache() async {
-    final result = await AudioService.instance.clearCache();
-    AudioAnalytics.cacheCleared(
-      bytesFreed: result.bytesFreed,
-      filesCleared: result.filesCleared,
-    );
-    if (!mounted) return;
-    final msg = result.filesCleared == 0
-        ? AudioCacheEmpty[selectedLanguage]
-        : '${AudioCacheCleared[selectedLanguage]} '
-            '(${_formatBytes(result.bytesFreed)})';
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
-  }
-
-  String _formatBytes(int bytes) {
-    if (bytes < 1024) return '$bytes B';
-    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
-  }
-
   Future<void> _rateApp() async {
     try {
       await ReviewService().forceRequestReview();
@@ -83,6 +116,12 @@ class _SettingScreenState extends State<SettingScreen>
             SnackBar(content: Text('Could not open store: $e')));
       }
     }
+  }
+
+  String get _timeLabel {
+    final h = _notifHour.toString().padLeft(2, '0');
+    final m = _notifMinute.toString().padLeft(2, '0');
+    return '$h:$m';
   }
 
   @override
@@ -129,12 +168,6 @@ class _SettingScreenState extends State<SettingScreen>
         onTap: _rateApp,
       ),
       _SettingItem(
-        icon: Icons.delete_sweep,
-        title: ClearAudioCache[selectedLanguage],
-        subtitle: FreeUpSpaceFromDownloadedAudio[selectedLanguage],
-        onTap: _clearAudioCache,
-      ),
-      _SettingItem(
         icon: Icons.privacy_tip,
         title: PrivacyPolicy[selectedLanguage],
         subtitle: ReadOurPrivacyPolicy[selectedLanguage],
@@ -150,13 +183,176 @@ class _SettingScreenState extends State<SettingScreen>
       ),
     ];
 
-    return ListView.builder(
+    return ListView(
       padding: EdgeInsets.symmetric(horizontal: context.responsiveSize(22)),
-      itemCount: items.length + 1,
-      itemBuilder: (_, i) {
-        if (i == items.length) return SizedBox(height: context.responsiveSize(30));
-        return _buildCard(items[i], i);
-      },
+      children: [
+        // ── Notification Card (special) ──────────────────────────
+        _buildNotificationCard(),
+        ...items.asMap().entries.map((e) => _buildCard(e.value, e.key + 1)),
+        SizedBox(height: context.responsiveSize(30)),
+      ],
+    );
+  }
+
+  /// Dedicated notification settings card with toggle + time picker
+  Widget _buildNotificationCard() {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: const Duration(milliseconds: 450),
+      curve: Curves.easeOutCubic,
+      builder: (_, v, child) => Transform.translate(
+          offset: Offset(0, 20 * (1 - v)),
+          child: Opacity(opacity: v, child: child)),
+      child: Container(
+        margin: EdgeInsets.only(bottom: context.responsiveSize(18)),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(context.responsiveSize(20)),
+          border: Border.all(
+              color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.5),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(context.responsiveSize(16)),
+          child: Column(
+            children: [
+              // ── Row 1: Toggle ──────────────────────────────────
+              Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(context.responsiveSize(12)),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFD36A).withOpacity(0.15),
+                      borderRadius:
+                      BorderRadius.circular(context.responsiveSize(14)),
+                    ),
+                    child: Icon(Icons.notifications_active_rounded,
+                        color: const Color(0xFFFFD36A),
+                        size: context.responsiveSize(26)),
+                  ),
+                  SizedBox(width: context.responsiveSize(16)),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          DailyNotification[selectedLanguage],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: context.responsiveFontSize(18),
+                              fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(height: context.responsiveSize(4)),
+                        Text(
+                          ReceiveDailyKrishnaQuotes[selectedLanguage],
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: context.responsiveFontSize(13)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Toggle switch
+                  Switch(
+                    value: _notifEnabled,
+                    activeColor: const Color(0xFFFFD36A),
+                    onChanged: (val) async {
+                      setState(() => _notifEnabled = val);
+                      await _saveNotifPrefs();
+                    },
+                  ),
+                ],
+              ),
+
+              // ── Row 2: Time picker (only when enabled) ────────
+              AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: _notifEnabled
+                    ? Column(
+                  children: [
+                    SizedBox(height: context.responsiveSize(12)),
+                    Divider(
+                        color: Colors.white.withOpacity(0.1), height: 1),
+                    SizedBox(height: context.responsiveSize(12)),
+                    GestureDetector(
+                      onTap: _pickTime,
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(
+                                context.responsiveSize(12)),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFFD36A)
+                                  .withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(
+                                  context.responsiveSize(14)),
+                            ),
+                            child: Icon(Icons.access_time_rounded,
+                                color: const Color(0xFFFFD36A),
+                                size: context.responsiveSize(26)),
+                          ),
+                          SizedBox(width: context.responsiveSize(16)),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  NotificationTime[selectedLanguage],
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                      context.responsiveFontSize(18),
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                    height: context.responsiveSize(4)),
+                                Text(
+                                    TapToChangeTime[selectedLanguage],
+                                  style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize:
+                                      context.responsiveFontSize(13)),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Time badge
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: context.responsiveSize(14),
+                              vertical: context.responsiveSize(8),
+                            ),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xFFFFD36A),
+                                  Color(0xFFFFB347)
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  context.responsiveSize(12)),
+                            ),
+                            child: Text(
+                              _timeLabel,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                                fontSize: context.responsiveFontSize(16),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -186,7 +382,8 @@ class _SettingScreenState extends State<SettingScreen>
                   padding: EdgeInsets.all(context.responsiveSize(12)),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFD36A).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(context.responsiveSize(14)),
+                    borderRadius:
+                    BorderRadius.circular(context.responsiveSize(14)),
                   ),
                   child: Icon(item.icon,
                       color: const Color(0xFFFFD36A),
@@ -229,7 +426,7 @@ class _SettingItem {
   final VoidCallback onTap;
   const _SettingItem(
       {required this.icon,
-      required this.title,
-      required this.subtitle,
-      required this.onTap});
+        required this.title,
+        required this.subtitle,
+        required this.onTap});
 }

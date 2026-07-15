@@ -89,7 +89,7 @@ class _MainHomeScreenState extends State<MainHomeScreen>
               child: Column(
                 children: [
                   _buildHeader(),
-                  if (_dailyQuote != null) _buildDailyQuoteCard(), // ── NEW
+                  // if (_dailyQuote != null) _buildDailyQuoteCard(), // ── NEW
                   SizedBox(height: context.responsiveSize(10)),
                   Expanded(child: _buildOptions()),
                 ],

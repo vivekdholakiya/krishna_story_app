@@ -1,0 +1,1491 @@
+{
+  "version": "v1",
+  "base_url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1",
+  "format": "opus",
+  "languages": [
+    "hu"
+  ],
+  "count": 370,
+  "stories": {
+    "1.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_01.opus",
+      "voice": "abhilash"
+    },
+    "1.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_02.opus",
+      "voice": "arya"
+    },
+    "1.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_03.opus",
+      "voice": "vidya"
+    },
+    "1.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_04.opus",
+      "voice": "arya"
+    },
+    "1.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_05.opus",
+      "voice": "hitesh"
+    },
+    "1.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_06.opus",
+      "voice": "abhilash"
+    },
+    "1.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_07.opus",
+      "voice": "hitesh"
+    },
+    "1.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_08.opus",
+      "voice": "hitesh"
+    },
+    "1.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_09.opus",
+      "voice": "anushka"
+    },
+    "1.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/01_10.opus",
+      "voice": "manisha"
+    },
+    "2.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_01.opus",
+      "voice": "abhilash"
+    },
+    "2.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_02.opus",
+      "voice": "abhilash"
+    },
+    "2.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_03.opus",
+      "voice": "abhilash"
+    },
+    "2.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_04.opus",
+      "voice": "abhilash"
+    },
+    "2.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_05.opus",
+      "voice": "abhilash"
+    },
+    "2.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_06.opus",
+      "voice": "abhilash"
+    },
+    "2.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_07.opus",
+      "voice": "abhilash"
+    },
+    "2.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_08.opus",
+      "voice": "abhilash"
+    },
+    "2.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_09.opus",
+      "voice": "abhilash"
+    },
+    "2.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/02_10.opus",
+      "voice": "abhilash"
+    },
+    "3.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_01.opus",
+      "voice": "abhilash"
+    },
+    "3.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_02.opus",
+      "voice": "abhilash"
+    },
+    "3.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_03.opus",
+      "voice": "abhilash"
+    },
+    "3.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_04.opus",
+      "voice": "abhilash"
+    },
+    "3.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_05.opus",
+      "voice": "abhilash"
+    },
+    "3.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_06.opus",
+      "voice": "abhilash"
+    },
+    "3.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_07.opus",
+      "voice": "abhilash"
+    },
+    "3.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_08.opus",
+      "voice": "abhilash"
+    },
+    "3.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_09.opus",
+      "voice": "abhilash"
+    },
+    "3.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/03_10.opus",
+      "voice": "abhilash"
+    },
+    "4.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_01.opus",
+      "voice": "hitesh"
+    },
+    "4.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_02.opus",
+      "voice": "hitesh"
+    },
+    "4.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_03.opus",
+      "voice": "hitesh"
+    },
+    "4.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_04.opus",
+      "voice": "hitesh"
+    },
+    "4.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_05.opus",
+      "voice": "hitesh"
+    },
+    "4.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_06.opus",
+      "voice": "hitesh"
+    },
+    "4.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_07.opus",
+      "voice": "hitesh"
+    },
+    "4.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_08.opus",
+      "voice": "hitesh"
+    },
+    "4.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_09.opus",
+      "voice": "hitesh"
+    },
+    "4.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/04_10.opus",
+      "voice": "hitesh"
+    },
+    "5.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_01.opus",
+      "voice": "vidya"
+    },
+    "5.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_02.opus",
+      "voice": "vidya"
+    },
+    "5.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_03.opus",
+      "voice": "vidya"
+    },
+    "5.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_04.opus",
+      "voice": "vidya"
+    },
+    "5.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_05.opus",
+      "voice": "vidya"
+    },
+    "5.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_06.opus",
+      "voice": "vidya"
+    },
+    "5.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_07.opus",
+      "voice": "vidya"
+    },
+    "5.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_08.opus",
+      "voice": "vidya"
+    },
+    "5.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_09.opus",
+      "voice": "vidya"
+    },
+    "5.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/05_10.opus",
+      "voice": "vidya"
+    },
+    "6.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_01.opus",
+      "voice": "vidya"
+    },
+    "6.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_02.opus",
+      "voice": "vidya"
+    },
+    "6.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_03.opus",
+      "voice": "vidya"
+    },
+    "6.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_04.opus",
+      "voice": "vidya"
+    },
+    "6.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_05.opus",
+      "voice": "vidya"
+    },
+    "6.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_06.opus",
+      "voice": "vidya"
+    },
+    "6.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_07.opus",
+      "voice": "vidya"
+    },
+    "6.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_08.opus",
+      "voice": "vidya"
+    },
+    "6.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_09.opus",
+      "voice": "vidya"
+    },
+    "6.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/06_10.opus",
+      "voice": "vidya"
+    },
+    "7.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_01.opus",
+      "voice": "anushka"
+    },
+    "7.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_02.opus",
+      "voice": "anushka"
+    },
+    "7.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_03.opus",
+      "voice": "anushka"
+    },
+    "7.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_04.opus",
+      "voice": "anushka"
+    },
+    "7.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_05.opus",
+      "voice": "anushka"
+    },
+    "7.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_06.opus",
+      "voice": "anushka"
+    },
+    "7.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_07.opus",
+      "voice": "anushka"
+    },
+    "7.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_08.opus",
+      "voice": "anushka"
+    },
+    "7.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_09.opus",
+      "voice": "anushka"
+    },
+    "7.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/07_10.opus",
+      "voice": "anushka"
+    },
+    "8.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_01.opus",
+      "voice": "abhilash"
+    },
+    "8.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_02.opus",
+      "voice": "abhilash"
+    },
+    "8.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_03.opus",
+      "voice": "abhilash"
+    },
+    "8.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_04.opus",
+      "voice": "abhilash"
+    },
+    "8.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_05.opus",
+      "voice": "abhilash"
+    },
+    "8.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_06.opus",
+      "voice": "abhilash"
+    },
+    "8.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_07.opus",
+      "voice": "abhilash"
+    },
+    "8.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_08.opus",
+      "voice": "abhilash"
+    },
+    "8.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_09.opus",
+      "voice": "abhilash"
+    },
+    "8.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/08_10.opus",
+      "voice": "abhilash"
+    },
+    "9.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_01.opus",
+      "voice": "abhilash"
+    },
+    "9.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_02.opus",
+      "voice": "abhilash"
+    },
+    "9.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_03.opus",
+      "voice": "abhilash"
+    },
+    "9.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_04.opus",
+      "voice": "abhilash"
+    },
+    "9.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_05.opus",
+      "voice": "abhilash"
+    },
+    "9.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_06.opus",
+      "voice": "abhilash"
+    },
+    "9.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_07.opus",
+      "voice": "abhilash"
+    },
+    "9.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_08.opus",
+      "voice": "abhilash"
+    },
+    "9.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_09.opus",
+      "voice": "abhilash"
+    },
+    "9.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/09_10.opus",
+      "voice": "abhilash"
+    },
+    "10.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_01.opus",
+      "voice": "hitesh"
+    },
+    "10.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_02.opus",
+      "voice": "hitesh"
+    },
+    "10.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_03.opus",
+      "voice": "hitesh"
+    },
+    "10.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_04.opus",
+      "voice": "hitesh"
+    },
+    "10.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_05.opus",
+      "voice": "hitesh"
+    },
+    "10.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_06.opus",
+      "voice": "hitesh"
+    },
+    "10.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_07.opus",
+      "voice": "hitesh"
+    },
+    "10.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_08.opus",
+      "voice": "hitesh"
+    },
+    "10.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_09.opus",
+      "voice": "hitesh"
+    },
+    "10.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/10_10.opus",
+      "voice": "hitesh"
+    },
+    "11.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_01.opus",
+      "voice": "hitesh"
+    },
+    "11.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_02.opus",
+      "voice": "hitesh"
+    },
+    "11.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_03.opus",
+      "voice": "hitesh"
+    },
+    "11.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_04.opus",
+      "voice": "hitesh"
+    },
+    "11.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_05.opus",
+      "voice": "hitesh"
+    },
+    "11.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_06.opus",
+      "voice": "hitesh"
+    },
+    "11.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_07.opus",
+      "voice": "hitesh"
+    },
+    "11.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_08.opus",
+      "voice": "hitesh"
+    },
+    "11.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_09.opus",
+      "voice": "hitesh"
+    },
+    "11.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/11_10.opus",
+      "voice": "hitesh"
+    },
+    "12.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_01.opus",
+      "voice": "anushka"
+    },
+    "12.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_02.opus",
+      "voice": "anushka"
+    },
+    "12.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_03.opus",
+      "voice": "anushka"
+    },
+    "12.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_04.opus",
+      "voice": "anushka"
+    },
+    "12.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_05.opus",
+      "voice": "anushka"
+    },
+    "12.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_06.opus",
+      "voice": "anushka"
+    },
+    "12.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_07.opus",
+      "voice": "anushka"
+    },
+    "12.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_08.opus",
+      "voice": "anushka"
+    },
+    "12.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_09.opus",
+      "voice": "anushka"
+    },
+    "12.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/12_10.opus",
+      "voice": "anushka"
+    },
+    "13.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_01.opus",
+      "voice": "abhilash"
+    },
+    "13.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_02.opus",
+      "voice": "abhilash"
+    },
+    "13.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_03.opus",
+      "voice": "abhilash"
+    },
+    "13.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_04.opus",
+      "voice": "abhilash"
+    },
+    "13.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_05.opus",
+      "voice": "abhilash"
+    },
+    "13.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_06.opus",
+      "voice": "abhilash"
+    },
+    "13.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_07.opus",
+      "voice": "abhilash"
+    },
+    "13.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_08.opus",
+      "voice": "abhilash"
+    },
+    "13.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_09.opus",
+      "voice": "abhilash"
+    },
+    "13.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/13_10.opus",
+      "voice": "abhilash"
+    },
+    "14.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_01.opus",
+      "voice": "vidya"
+    },
+    "14.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_02.opus",
+      "voice": "vidya"
+    },
+    "14.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_03.opus",
+      "voice": "vidya"
+    },
+    "14.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_04.opus",
+      "voice": "vidya"
+    },
+    "14.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_05.opus",
+      "voice": "vidya"
+    },
+    "14.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_06.opus",
+      "voice": "vidya"
+    },
+    "14.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_07.opus",
+      "voice": "vidya"
+    },
+    "14.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_08.opus",
+      "voice": "vidya"
+    },
+    "14.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_09.opus",
+      "voice": "vidya"
+    },
+    "14.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/14_10.opus",
+      "voice": "vidya"
+    },
+    "15.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_01.opus",
+      "voice": "anushka"
+    },
+    "15.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_02.opus",
+      "voice": "anushka"
+    },
+    "15.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_03.opus",
+      "voice": "anushka"
+    },
+    "15.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_04.opus",
+      "voice": "anushka"
+    },
+    "15.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_05.opus",
+      "voice": "anushka"
+    },
+    "15.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_06.opus",
+      "voice": "anushka"
+    },
+    "15.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_07.opus",
+      "voice": "anushka"
+    },
+    "15.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_08.opus",
+      "voice": "anushka"
+    },
+    "15.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_09.opus",
+      "voice": "anushka"
+    },
+    "15.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/15_10.opus",
+      "voice": "anushka"
+    },
+    "16.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_01.opus",
+      "voice": "anushka"
+    },
+    "16.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_02.opus",
+      "voice": "anushka"
+    },
+    "16.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_03.opus",
+      "voice": "anushka"
+    },
+    "16.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_04.opus",
+      "voice": "anushka"
+    },
+    "16.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_05.opus",
+      "voice": "anushka"
+    },
+    "16.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_06.opus",
+      "voice": "anushka"
+    },
+    "16.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_07.opus",
+      "voice": "anushka"
+    },
+    "16.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_08.opus",
+      "voice": "anushka"
+    },
+    "16.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_09.opus",
+      "voice": "anushka"
+    },
+    "16.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/16_10.opus",
+      "voice": "anushka"
+    },
+    "17.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_01.opus",
+      "voice": "abhilash"
+    },
+    "17.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_02.opus",
+      "voice": "abhilash"
+    },
+    "17.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_03.opus",
+      "voice": "abhilash"
+    },
+    "17.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_04.opus",
+      "voice": "abhilash"
+    },
+    "17.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_05.opus",
+      "voice": "abhilash"
+    },
+    "17.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_06.opus",
+      "voice": "abhilash"
+    },
+    "17.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_07.opus",
+      "voice": "abhilash"
+    },
+    "17.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_08.opus",
+      "voice": "abhilash"
+    },
+    "17.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_09.opus",
+      "voice": "abhilash"
+    },
+    "17.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/17_10.opus",
+      "voice": "abhilash"
+    },
+    "18.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_01.opus",
+      "voice": "abhilash"
+    },
+    "18.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_02.opus",
+      "voice": "abhilash"
+    },
+    "18.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_03.opus",
+      "voice": "abhilash"
+    },
+    "18.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_04.opus",
+      "voice": "abhilash"
+    },
+    "18.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_05.opus",
+      "voice": "abhilash"
+    },
+    "18.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_06.opus",
+      "voice": "abhilash"
+    },
+    "18.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_07.opus",
+      "voice": "abhilash"
+    },
+    "18.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_08.opus",
+      "voice": "abhilash"
+    },
+    "18.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_09.opus",
+      "voice": "abhilash"
+    },
+    "18.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/18_10.opus",
+      "voice": "abhilash"
+    },
+    "19.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_01.opus",
+      "voice": "abhilash"
+    },
+    "19.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_02.opus",
+      "voice": "abhilash"
+    },
+    "19.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_03.opus",
+      "voice": "abhilash"
+    },
+    "19.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_04.opus",
+      "voice": "abhilash"
+    },
+    "19.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_05.opus",
+      "voice": "abhilash"
+    },
+    "19.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_06.opus",
+      "voice": "abhilash"
+    },
+    "19.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_07.opus",
+      "voice": "abhilash"
+    },
+    "19.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_08.opus",
+      "voice": "abhilash"
+    },
+    "19.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_09.opus",
+      "voice": "abhilash"
+    },
+    "19.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/19_10.opus",
+      "voice": "abhilash"
+    },
+    "20.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_01.opus",
+      "voice": "vidya"
+    },
+    "20.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_02.opus",
+      "voice": "vidya"
+    },
+    "20.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_03.opus",
+      "voice": "vidya"
+    },
+    "20.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_04.opus",
+      "voice": "vidya"
+    },
+    "20.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_05.opus",
+      "voice": "vidya"
+    },
+    "20.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_06.opus",
+      "voice": "vidya"
+    },
+    "20.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_07.opus",
+      "voice": "vidya"
+    },
+    "20.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_08.opus",
+      "voice": "vidya"
+    },
+    "20.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_09.opus",
+      "voice": "vidya"
+    },
+    "20.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/20_10.opus",
+      "voice": "vidya"
+    },
+    "21.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_01.opus",
+      "voice": "hitesh"
+    },
+    "21.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_02.opus",
+      "voice": "hitesh"
+    },
+    "21.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_03.opus",
+      "voice": "hitesh"
+    },
+    "21.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_04.opus",
+      "voice": "hitesh"
+    },
+    "21.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_05.opus",
+      "voice": "hitesh"
+    },
+    "21.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_06.opus",
+      "voice": "hitesh"
+    },
+    "21.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_07.opus",
+      "voice": "hitesh"
+    },
+    "21.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_08.opus",
+      "voice": "hitesh"
+    },
+    "21.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_09.opus",
+      "voice": "hitesh"
+    },
+    "21.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/21_10.opus",
+      "voice": "hitesh"
+    },
+    "22.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_01.opus",
+      "voice": "abhilash"
+    },
+    "22.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_02.opus",
+      "voice": "abhilash"
+    },
+    "22.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_03.opus",
+      "voice": "abhilash"
+    },
+    "22.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_04.opus",
+      "voice": "abhilash"
+    },
+    "22.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_05.opus",
+      "voice": "abhilash"
+    },
+    "22.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_06.opus",
+      "voice": "abhilash"
+    },
+    "22.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_07.opus",
+      "voice": "abhilash"
+    },
+    "22.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_08.opus",
+      "voice": "abhilash"
+    },
+    "22.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_09.opus",
+      "voice": "abhilash"
+    },
+    "22.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/22_10.opus",
+      "voice": "abhilash"
+    },
+    "23.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_01.opus",
+      "voice": "anushka"
+    },
+    "23.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_02.opus",
+      "voice": "anushka"
+    },
+    "23.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_03.opus",
+      "voice": "anushka"
+    },
+    "23.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_04.opus",
+      "voice": "anushka"
+    },
+    "23.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_05.opus",
+      "voice": "anushka"
+    },
+    "23.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_06.opus",
+      "voice": "anushka"
+    },
+    "23.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_07.opus",
+      "voice": "anushka"
+    },
+    "23.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_08.opus",
+      "voice": "anushka"
+    },
+    "23.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_09.opus",
+      "voice": "anushka"
+    },
+    "23.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/23_10.opus",
+      "voice": "anushka"
+    },
+    "24.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_01.opus",
+      "voice": "hitesh"
+    },
+    "24.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_02.opus",
+      "voice": "hitesh"
+    },
+    "24.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_03.opus",
+      "voice": "hitesh"
+    },
+    "24.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_04.opus",
+      "voice": "hitesh"
+    },
+    "24.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_05.opus",
+      "voice": "hitesh"
+    },
+    "24.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_06.opus",
+      "voice": "hitesh"
+    },
+    "24.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_07.opus",
+      "voice": "hitesh"
+    },
+    "24.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_08.opus",
+      "voice": "hitesh"
+    },
+    "24.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_09.opus",
+      "voice": "hitesh"
+    },
+    "24.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/24_10.opus",
+      "voice": "hitesh"
+    },
+    "25.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_01.opus",
+      "voice": "vidya"
+    },
+    "25.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_02.opus",
+      "voice": "vidya"
+    },
+    "25.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_03.opus",
+      "voice": "vidya"
+    },
+    "25.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_04.opus",
+      "voice": "vidya"
+    },
+    "25.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_05.opus",
+      "voice": "vidya"
+    },
+    "25.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_06.opus",
+      "voice": "vidya"
+    },
+    "25.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_07.opus",
+      "voice": "vidya"
+    },
+    "25.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_08.opus",
+      "voice": "vidya"
+    },
+    "25.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_09.opus",
+      "voice": "vidya"
+    },
+    "25.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/25_10.opus",
+      "voice": "vidya"
+    },
+    "26.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_01.opus",
+      "voice": "vidya"
+    },
+    "26.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_02.opus",
+      "voice": "vidya"
+    },
+    "26.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_03.opus",
+      "voice": "vidya"
+    },
+    "26.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_04.opus",
+      "voice": "vidya"
+    },
+    "26.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_05.opus",
+      "voice": "vidya"
+    },
+    "26.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_06.opus",
+      "voice": "vidya"
+    },
+    "26.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_07.opus",
+      "voice": "vidya"
+    },
+    "26.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_08.opus",
+      "voice": "vidya"
+    },
+    "26.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_09.opus",
+      "voice": "vidya"
+    },
+    "26.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/26_10.opus",
+      "voice": "vidya"
+    },
+    "27.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_01.opus",
+      "voice": "vidya"
+    },
+    "27.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_02.opus",
+      "voice": "vidya"
+    },
+    "27.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_03.opus",
+      "voice": "vidya"
+    },
+    "27.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_04.opus",
+      "voice": "vidya"
+    },
+    "27.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_05.opus",
+      "voice": "vidya"
+    },
+    "27.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_06.opus",
+      "voice": "vidya"
+    },
+    "27.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_07.opus",
+      "voice": "vidya"
+    },
+    "27.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_08.opus",
+      "voice": "vidya"
+    },
+    "27.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_09.opus",
+      "voice": "vidya"
+    },
+    "27.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/27_10.opus",
+      "voice": "vidya"
+    },
+    "28.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_01.opus",
+      "voice": "vidya"
+    },
+    "28.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_02.opus",
+      "voice": "vidya"
+    },
+    "28.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_03.opus",
+      "voice": "vidya"
+    },
+    "28.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_04.opus",
+      "voice": "vidya"
+    },
+    "28.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_05.opus",
+      "voice": "vidya"
+    },
+    "28.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_06.opus",
+      "voice": "vidya"
+    },
+    "28.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_07.opus",
+      "voice": "vidya"
+    },
+    "28.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_08.opus",
+      "voice": "vidya"
+    },
+    "28.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_09.opus",
+      "voice": "vidya"
+    },
+    "28.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/28_10.opus",
+      "voice": "vidya"
+    },
+    "29.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_01.opus",
+      "voice": "hitesh"
+    },
+    "29.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_02.opus",
+      "voice": "hitesh"
+    },
+    "29.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_03.opus",
+      "voice": "hitesh"
+    },
+    "29.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_04.opus",
+      "voice": "hitesh"
+    },
+    "29.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_05.opus",
+      "voice": "hitesh"
+    },
+    "29.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_06.opus",
+      "voice": "hitesh"
+    },
+    "29.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_07.opus",
+      "voice": "hitesh"
+    },
+    "29.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_08.opus",
+      "voice": "hitesh"
+    },
+    "29.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_09.opus",
+      "voice": "hitesh"
+    },
+    "29.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/29_10.opus",
+      "voice": "hitesh"
+    },
+    "30.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_01.opus",
+      "voice": "anushka"
+    },
+    "30.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_02.opus",
+      "voice": "anushka"
+    },
+    "30.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_03.opus",
+      "voice": "anushka"
+    },
+    "30.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_04.opus",
+      "voice": "anushka"
+    },
+    "30.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_05.opus",
+      "voice": "anushka"
+    },
+    "30.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_06.opus",
+      "voice": "anushka"
+    },
+    "30.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_07.opus",
+      "voice": "anushka"
+    },
+    "30.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_08.opus",
+      "voice": "anushka"
+    },
+    "30.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_09.opus",
+      "voice": "anushka"
+    },
+    "30.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/30_10.opus",
+      "voice": "anushka"
+    },
+    "31.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_01.opus",
+      "voice": "anushka"
+    },
+    "31.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_02.opus",
+      "voice": "anushka"
+    },
+    "31.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_03.opus",
+      "voice": "anushka"
+    },
+    "31.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_04.opus",
+      "voice": "anushka"
+    },
+    "31.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_05.opus",
+      "voice": "anushka"
+    },
+    "31.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_06.opus",
+      "voice": "anushka"
+    },
+    "31.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_07.opus",
+      "voice": "anushka"
+    },
+    "31.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_08.opus",
+      "voice": "anushka"
+    },
+    "31.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_09.opus",
+      "voice": "anushka"
+    },
+    "31.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/31_10.opus",
+      "voice": "anushka"
+    },
+    "32.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_01.opus",
+      "voice": "abhilash"
+    },
+    "32.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_02.opus",
+      "voice": "abhilash"
+    },
+    "32.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_03.opus",
+      "voice": "abhilash"
+    },
+    "32.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_04.opus",
+      "voice": "abhilash"
+    },
+    "32.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_05.opus",
+      "voice": "abhilash"
+    },
+    "32.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_06.opus",
+      "voice": "abhilash"
+    },
+    "32.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_07.opus",
+      "voice": "abhilash"
+    },
+    "32.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_08.opus",
+      "voice": "abhilash"
+    },
+    "32.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_09.opus",
+      "voice": "abhilash"
+    },
+    "32.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/32_10.opus",
+      "voice": "abhilash"
+    },
+    "33.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_01.opus",
+      "voice": "vidya"
+    },
+    "33.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_02.opus",
+      "voice": "vidya"
+    },
+    "33.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_03.opus",
+      "voice": "vidya"
+    },
+    "33.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_04.opus",
+      "voice": "vidya"
+    },
+    "33.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_05.opus",
+      "voice": "vidya"
+    },
+    "33.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_06.opus",
+      "voice": "vidya"
+    },
+    "33.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_07.opus",
+      "voice": "vidya"
+    },
+    "33.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_08.opus",
+      "voice": "vidya"
+    },
+    "33.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_09.opus",
+      "voice": "vidya"
+    },
+    "33.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/33_10.opus",
+      "voice": "vidya"
+    },
+    "34.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_01.opus",
+      "voice": "anushka"
+    },
+    "34.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_02.opus",
+      "voice": "anushka"
+    },
+    "34.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_03.opus",
+      "voice": "anushka"
+    },
+    "34.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_04.opus",
+      "voice": "anushka"
+    },
+    "34.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_05.opus",
+      "voice": "anushka"
+    },
+    "34.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_06.opus",
+      "voice": "anushka"
+    },
+    "34.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_07.opus",
+      "voice": "anushka"
+    },
+    "34.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_08.opus",
+      "voice": "anushka"
+    },
+    "34.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_09.opus",
+      "voice": "anushka"
+    },
+    "34.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/34_10.opus",
+      "voice": "anushka"
+    },
+    "35.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_01.opus",
+      "voice": "hitesh"
+    },
+    "35.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_02.opus",
+      "voice": "hitesh"
+    },
+    "35.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_03.opus",
+      "voice": "hitesh"
+    },
+    "35.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_04.opus",
+      "voice": "hitesh"
+    },
+    "35.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_05.opus",
+      "voice": "hitesh"
+    },
+    "35.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_06.opus",
+      "voice": "hitesh"
+    },
+    "35.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_07.opus",
+      "voice": "hitesh"
+    },
+    "35.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_08.opus",
+      "voice": "hitesh"
+    },
+    "35.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_09.opus",
+      "voice": "hitesh"
+    },
+    "35.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/35_10.opus",
+      "voice": "hitesh"
+    },
+    "36.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_01.opus",
+      "voice": "hitesh"
+    },
+    "36.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_02.opus",
+      "voice": "hitesh"
+    },
+    "36.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_03.opus",
+      "voice": "hitesh"
+    },
+    "36.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_04.opus",
+      "voice": "hitesh"
+    },
+    "36.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_05.opus",
+      "voice": "hitesh"
+    },
+    "36.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_06.opus",
+      "voice": "hitesh"
+    },
+    "36.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_07.opus",
+      "voice": "hitesh"
+    },
+    "36.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_08.opus",
+      "voice": "hitesh"
+    },
+    "36.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_09.opus",
+      "voice": "hitesh"
+    },
+    "36.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/36_10.opus",
+      "voice": "hitesh"
+    },
+    "37.1.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_01.opus",
+      "voice": "anushka"
+    },
+    "37.2.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_02.opus",
+      "voice": "anushka"
+    },
+    "37.3.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_03.opus",
+      "voice": "anushka"
+    },
+    "37.4.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_04.opus",
+      "voice": "anushka"
+    },
+    "37.5.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_05.opus",
+      "voice": "anushka"
+    },
+    "37.6.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_06.opus",
+      "voice": "anushka"
+    },
+    "37.7.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_07.opus",
+      "voice": "anushka"
+    },
+    "37.8.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_08.opus",
+      "voice": "anushka"
+    },
+    "37.9.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_09.opus",
+      "voice": "anushka"
+    },
+    "37.10.2": {
+      "url": "https://pub-18b8b7f021394fefb831920c904f83e7.r2.dev/v1/hu/37_10.opus",
+      "voice": "anushka"
+    }
+  }
+}

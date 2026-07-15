@@ -72,10 +72,13 @@ class AnalyticsService {
 
   /// Generic event logger for ad-hoc events (e.g. audio playback analytics).
   /// Firebase requires parameter values to be String, num, or bool — nulls are dropped.
+// AFTER:
   Future<void> logCustomEvent(String name, Map<String, Object?> params) {
     final cleaned = <String, Object>{};
     params.forEach((k, v) {
-      if (v != null) cleaned[k] = v;
+      if (v == null) return;
+      // Firebase accepts only String or num — convert bool to 1/0
+      cleaned[k] = v is bool ? (v ? 1 : 0) : v;  // ✅
     });
     return _analytics.logEvent(name: name, parameters: cleaned);
   }
