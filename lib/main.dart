@@ -37,6 +37,13 @@ Future<void> main() async {
 
   AdsControllerMain.markMobileAdsInitialized();
 
+  // Touching `adsControllerVar` here forces its constructor to run now
+  // (Dart top-level `final`s are lazily created on first use). That
+  // constructor attaches the App Open lifecycle observer and kicks off
+  // the first App Open ad preload — must run after
+  // MobileAds.instance.initialize().
+  adsControllerVar.loadAppOpenAd();
+
   final notificationService = NotificationService();
   await notificationService.initialize();
 

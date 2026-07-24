@@ -32,13 +32,46 @@ class _StoriesListScreenState extends State<StoriesListScreen>
   late AnimationController _controller;
   late Animation<double> _fade;
 
+  // Precomputed native-ad placement: `null` = ad slot, `int` = index into
+  // widget.category.stories. Built once in initState so the ListView never
+  // has to recompute ad positions on every rebuild.
+  late final List<int?> _rowSlots;
+
+  static const int _adInterval = 5; // one ad every ~10 stories
+  static const int _minItemsBeforeFirstAd = 4; // never in the first 4 rows
+
+  List<int?> _buildRowSlots(int itemCount) {
+    final slots = <int?>[];
+    var sinceLastAd = 0;
+
+    for (var i = 0; i < itemCount; i++) {
+      slots.add(i);
+      sinceLastAd++;
+
+      final pastMinimum = (i + 1) >= _minItemsBeforeFirstAd;
+      final isLastContentItem = i == itemCount - 1;
+
+      // Never place an ad as the very last row, and never before the
+      // minimum number of real stories has been shown.
+      if (pastMinimum && sinceLastAd >= _adInterval && !isLastContentItem) {
+        slots.add(null);
+        sinceLastAd = 0;
+      }
+    }
+    return slots;
+  }
+
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
+
+    _rowSlots = _buildRowSlots(widget.category.stories.length);
   }
 
   @override
@@ -50,10 +83,14 @@ class _StoriesListScreenState extends State<StoriesListScreen>
   String _storyKey(int index) {
     final base = '${widget.categoryIndex + 1}.${index + 1}';
     switch (selectedLanguage) {
-      case 'gu':  return '$base.1';
-      case 'hu':  return '$base.2';
-      case 'sa':  return '$base.3';
-      default:    return base;
+      case 'gu':
+        return '$base.1';
+      case 'hu':
+        return '$base.2';
+      case 'sa':
+        return '$base.3';
+      default:
+        return base;
     }
   }
 
@@ -70,19 +107,19 @@ class _StoriesListScreenState extends State<StoriesListScreen>
     );
 
     void navigate() => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => StoryDetailScreen(
-              title: title,
-              content: content,
-              colors: widget.colors,
-              storyKey: key,
-              categoryIndex: widget.categoryIndex,
-              storyIndex: index,
-              categoryName: widget.category.category,
-            ),
-          ),
-        );
+      context,
+      MaterialPageRoute(
+        builder: (_) => StoryDetailScreen(
+          title: title,
+          content: content,
+          colors: widget.colors,
+          storyKey: key,
+          categoryIndex: widget.categoryIndex,
+          storyIndex: index,
+          categoryName: widget.category.category,
+        ),
+      ),
+    );
 
     if (wasAdGated) {
       adsControllerVar.showRewardedAd(context, onRewardGranted: navigate);
@@ -106,14 +143,29 @@ class _StoriesListScreenState extends State<StoriesListScreen>
                     opacity: _fade,
                     child: ListView.builder(
                       padding: EdgeInsets.symmetric(
-                          horizontal: context.responsiveSize(18),
-                          vertical: context.responsiveSize(12)),
-                      itemCount: widget.category.stories.length,
-                      itemBuilder: (_, i) {
+                        horizontal: context.responsiveSize(18),
+                        vertical: context.responsiveSize(12),
+                      ),
+                      itemCount: _rowSlots.length,
+                      itemBuilder: (_, combinedIndex) {
+                        final slot = _rowSlots[combinedIndex];
+
+                        if (slot == null) {
+                          return NativeAdWidget(
+                            templateType: NativeAdTemplateType.small,
+                            margin: EdgeInsets.only(
+                              bottom: context.responsiveSize(18),
+                            ),
+                          );
+                        }
+
+                        final i = slot;
                         final key = _storyKey(i);
                         final title = widget.category.stories[i];
-                        final content = widget.storyDetails[key] ??
+                        final content =
+                            widget.storyDetails[key] ??
                             StoryContentNotAvailable[selectedLanguage];
+
                         return _buildCard(i, title, content, key);
                       },
                     ),
@@ -141,21 +193,29 @@ class _StoriesListScreenState extends State<StoriesListScreen>
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(context.responsiveSize(14)),
-                border: Border.all(color: const Color(0xFFFFD36A).withOpacity(0.4)),
+                border: Border.all(
+                  color: const Color(0xFFFFD36A).withOpacity(0.4),
+                ),
               ),
-              child: Icon(Icons.arrow_back,
-                  color: Colors.white, size: context.responsiveSize(24)),
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: context.responsiveSize(24),
+              ),
             ),
           ),
           SizedBox(width: context.responsiveSize(14)),
           Expanded(
-            child: Text(widget.category.category,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: context.responsiveFontSize(22),
-                    fontWeight: FontWeight.bold)),
+            child: Text(
+              widget.category.category,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: context.responsiveFontSize(22),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -163,26 +223,30 @@ class _StoriesListScreenState extends State<StoriesListScreen>
   }
 
   Widget _buildCard(int index, String title, String content, String key) {
-    final locked = index > 2;
+    final locked = index > 1;
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 1.0),
       duration: Duration(milliseconds: 300 + index * 60),
       curve: Curves.easeOutCubic,
       builder: (_, v, child) => Transform.translate(
-          offset: Offset(0, 20 * (1 - v)),
-          child: Opacity(opacity: v, child: child)),
+        offset: Offset(0, 20 * (1 - v)),
+        child: Opacity(opacity: v, child: child),
+      ),
       child: GestureDetector(
         onTap: () => _openStory(index, title, content, key),
         child: Container(
           margin: EdgeInsets.only(bottom: context.responsiveSize(18)),
           padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveSize(16),
-              vertical: context.responsiveSize(14)),
+            horizontal: context.responsiveSize(16),
+            vertical: context.responsiveSize(14),
+          ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.12),
             borderRadius: BorderRadius.circular(context.responsiveSize(20)),
             border: Border.all(
-                color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.2),
+              color: const Color(0xFFFFD36A).withOpacity(0.35),
+              width: 1.2,
+            ),
           ),
           child: Row(
             children: [
@@ -198,28 +262,37 @@ class _StoriesListScreenState extends State<StoriesListScreen>
                 child: Text(
                   (index + 1).toString().padLeft(2, '0'),
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: context.responsiveFontSize(16)),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: context.responsiveFontSize(16),
+                  ),
                 ),
               ),
               SizedBox(width: context.responsiveSize(16)),
               Expanded(
-                child: Text(title,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: context.responsiveFontSize(16),
-                        fontWeight: FontWeight.w600)),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: context.responsiveFontSize(16),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               if (locked)
-                Image.asset('assets/images/lock.png',
-                    color: const Color(0xFFFFD36A),
-                    height: context.responsiveSize(24),
-                    width: context.responsiveSize(24))
+                Image.asset(
+                  'assets/images/lock.png',
+                  color: const Color(0xFFFFD36A),
+                  height: context.responsiveSize(24),
+                  width: context.responsiveSize(24),
+                )
               else ...[
                 const SizedBox(width: 4),
-                Icon(Icons.arrow_forward_ios,
-                    size: context.responsiveSize(16), color: Colors.white70),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: context.responsiveSize(16),
+                  color: Colors.white70,
+                ),
               ],
             ],
           ),

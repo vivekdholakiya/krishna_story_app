@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:krishna_stories_app/services/app_text_data.dart';
@@ -13,9 +12,11 @@ final AdsControllerMain adsControllerVar = AdsControllerMain(
   interstitialId: interstitialId,
   rewardedId: rewardedAdId,
   bannerId: bannerAdId,
+  appOpenId: openAdId,
+  nativeAdId: nativeAdId,
 );
 
-class AdsControllerMain {
+class AdsControllerMain with WidgetsBindingObserver {
   static final ValueNotifier<bool> mobileAdsInitialized = ValueNotifier<bool>(false);
 
   static void markMobileAdsInitialized() {
@@ -25,17 +26,23 @@ class AdsControllerMain {
   final String interstitialId;
   final String rewardedId;
   final String bannerId;
-  AppOpenAd? _appOpenAd;
-  bool _isAppOpenAdShowing = false;
+  final String appOpenId;
+  final String nativeAdId;
 
   AdsControllerMain({
     required this.interstitialId,
     required this.rewardedId,
     required this.bannerId,
+    required this.appOpenId,
+    required this.nativeAdId,
   }) {
     _getUserConsent();
+    // Lifecycle observer for App Open ads — attached here so nothing needs
+    // to change in main.dart beyond referencing `adsControllerVar` once.
+    WidgetsBinding.instance.addObserver(this);
+    // Preload the very first App Open ad as early as possible.
+    loadAppOpenAd();
   }
-
 
   Future<bool> _ensureMobileAdsReady() async {
     if (mobileAdsInitialized.value) return true;
@@ -63,50 +70,134 @@ class AdsControllerMain {
     }
   }
 
-  // ── App Open Ad ────────────────────────────────────────────────
-  Future<void> loadAppOpenAd() async {
-    if (!await _ensureMobileAdsReady()) return;
-    if (_appOpenAd != null) return;
-    await AppOpenAd.load(
-      adUnitId: interstitialId,
-      request: const AdRequest(),
-      adLoadCallback: AppOpenAdLoadCallback(
-        onAdLoaded: (ad) {
-          _appOpenAd = ad;
-        },
-        onAdFailedToLoad: (_) {
-          _appOpenAd = null;
-        },
-      ),
-    );
+  // ── Cross-format full-screen-ad lock ───────────────────────────
+  // `adShowed == true` means "no full-screen ad is currently on screen" —
+  // every full-screen format (App Open, Interstitial, Rewarded) reads this
+  // before showing and sets it while it's up, so they never overlap.
+  bool adShowed = true;
+  DateTime? _lastFullScreenAdShownAt;
+  static const Duration _crossFormatGap = Duration(seconds: 60);
+
+  bool get _canShowAnyFullScreenAd {
+    if (!adShowed) return false; // something is already showing
+    if (_lastFullScreenAdShownAt == null) return true;
+    return DateTime.now().difference(_lastFullScreenAdShownAt!) >= _crossFormatGap;
   }
 
-  void showAppOpenAdIfAvailable() {
-    if (_appOpenAd == null || _isAppOpenAdShowing) return;
-    _isAppOpenAdShowing = true;
+  // ── App Open Ad ────────────────────────────────────────────────
+  AppOpenAd? appOpenAd;
+  bool _isLoadingAppOpenAd = false;
+  DateTime? _appOpenLoadedAt;
+  DateTime? _lastAppOpenShownAt;
+  bool _isAppOpenAdShowing = false;
+  bool _hasHadFirstResume = false;
+  int _appOpenLoadAttempts = 0;
 
-    _appOpenAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (_) {
-        AnalyticsService.instance.logAdImpression(
-          adUnit: interstitialId,
-          adFormat: 'app_open',
-        );
+  /// Google recommends not showing a cached App Open ad once it's older
+  /// than ~4 hours.
+  static const Duration _appOpenMaxAge = Duration(hours: 4);
+
+  /// Minimum time between two App Open ad impressions.
+  static const Duration appOpenCooldown = Duration(hours: 4);
+
+  bool get _isAppOpenAdExpired {
+    if (_appOpenLoadedAt == null) return true;
+    return DateTime.now().difference(_appOpenLoadedAt!) > _appOpenMaxAge;
+  }
+
+  bool get _isAppOpenAdAvailable => appOpenAd != null && !_isAppOpenAdExpired;
+
+  Future<void> loadAppOpenAd() async {
+    if (!await _ensureMobileAdsReady()) return;
+    if (_isLoadingAppOpenAd || _isAppOpenAdAvailable) return;
+    _isLoadingAppOpenAd = true;
+
+    try {
+      await AppOpenAd.load(
+        adUnitId: appOpenId,
+        request: const AdRequest(),
+        adLoadCallback: AppOpenAdLoadCallback(
+          onAdLoaded: (ad) {
+            _isLoadingAppOpenAd = false;
+            _appOpenLoadAttempts = 0;
+            appOpenAd = ad;
+            _appOpenLoadedAt = DateTime.now();
+          },
+          onAdFailedToLoad: (error) {
+            _isLoadingAppOpenAd = false;
+            appOpenAd = null;
+            _appOpenLoadAttempts++;
+            // Gentle backoff instead of hammering the network on repeated
+            // no-fill/no-internet failures.
+            final delaySeconds = [30, 60, 120, 300][
+                (_appOpenLoadAttempts - 1).clamp(0, 3)];
+            Future.delayed(Duration(seconds: delaySeconds), () {
+              if (!_isAppOpenAdAvailable) loadAppOpenAd();
+            });
+          },
+        ),
+      );
+    } catch (_) {
+      _isLoadingAppOpenAd = false;
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+
+    // The very first "resumed" event fires right after cold start — that
+    // moment belongs to the splash screen, not an App Open ad. Only show
+    // on genuine background -> foreground transitions.
+    if (!_hasHadFirstResume) {
+      _hasHadFirstResume = true;
+      return;
+    }
+    showOpenAdIfEligible();
+  }
+
+  /// Shows the cached App Open ad only if every rule allows it. Safe to
+  /// call speculatively — it silently no-ops when conditions aren't met.
+  void showOpenAdIfEligible() {
+    if (_isAppOpenAdShowing) return; // never show two at once
+
+    if (!_isAppOpenAdAvailable) {
+      loadAppOpenAd();
+      return;
+    }
+
+    if (_lastAppOpenShownAt != null &&
+        DateTime.now().difference(_lastAppOpenShownAt!) < appOpenCooldown) {
+      return; // respect the cooldown between impressions
+    }
+
+    if (!_canShowAnyFullScreenAd) {
+      return; // an Interstitial/Rewarded ad is showing or just closed
+    }
+
+    _isAppOpenAdShowing = true;
+    appOpenAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) {
+        adShowed = false;
+        _lastFullScreenAdShownAt = DateTime.now();
       },
       onAdDismissedFullScreenContent: (ad) {
         _isAppOpenAdShowing = false;
+        adShowed = true;
+        _lastAppOpenShownAt = DateTime.now();
         ad.dispose();
-        _appOpenAd = null;
-        loadAppOpenAd();
+        appOpenAd = null;
+        loadAppOpenAd(); // always preload the next one right away
       },
-      onAdFailedToShowFullScreenContent: (ad, _) {
+      onAdFailedToShowFullScreenContent: (ad, error) {
         _isAppOpenAdShowing = false;
+        adShowed = true;
         ad.dispose();
-        _appOpenAd = null;
+        appOpenAd = null;
         loadAppOpenAd();
       },
     );
-
-    _appOpenAd!.show();
+    appOpenAd!.show();
   }
 
   // ── Interstitial ─────────────────────────────────────────────
@@ -117,8 +208,6 @@ class AdsControllerMain {
   static const Duration _interstitialCooldown = Duration(minutes: 2);
 
   Future<void> loadInterstitialAd() async {
-    print("load Ads123 loadInterstitialAd");
-  
     if (!await _ensureMobileAdsReady()) return;
     if (_isInterstitialReady || _isInterstitialLoading) return;
     _isInterstitialLoading = true;
@@ -141,9 +230,8 @@ class AdsControllerMain {
   }
 
   void showInterstititalAd(BuildContext context, {VoidCallback? onRoute}) {
-    print("show Ads123 showInterstititalAd");
-    
     final now = DateTime.now();
+
     if (_lastInterstitialShownAt != null &&
         now.difference(_lastInterstitialShownAt!) < _interstitialCooldown) {
       // Frequency cap: don't show and don't trigger new load.
@@ -151,34 +239,43 @@ class AdsControllerMain {
       return;
     }
 
-    if (!_isInterstitialReady || _interstitialAd == null) {
+    // Cross-format guard: never overlap App Open/Rewarded, never show
+    // within 60s of another full-screen ad (e.g. right after App Open).
+    if (!_canShowAnyFullScreenAd) {
+      onRoute?.call();
+      return;
+    }
+
+    if (_interstitialAd == null) {
+      adShowed = true;
       loadInterstitialAd();
       onRoute?.call();
       return;
     }
 
-    _interstitialAd!
-      ..fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (_) {
-          _lastInterstitialShownAt = DateTime.now();
-        },
-        onAdDismissedFullScreenContent: (_) {
-          _isInterstitialReady = false;
-          AnalyticsService.instance.logInterstitialShown(adUnit: interstitialId);
-          _interstitialAd?.dispose();
-          _interstitialAd = null;
-          // Reload ONLY after it was shown/dismissed.
-          loadInterstitialAd();
-          onRoute?.call();
-        },
-        onAdFailedToShowFullScreenContent: (_, __) {
-          _isInterstitialReady = false;
-          _interstitialAd?.dispose();
-          _interstitialAd = null;
-          // Do not reload here; next show attempt will trigger a load.
-          onRoute?.call(); // fallback
-        },
-      )
+    _interstitialAd
+      ?..fullScreenContentCallback = FullScreenContentCallback(
+          onAdShowedFullScreenContent: (ad) {
+            adShowed = false;
+            _lastInterstitialShownAt = DateTime.now();
+            _lastFullScreenAdShownAt = DateTime.now();
+            onRoute?.call();
+          },
+          onAdDismissedFullScreenContent: (ad) async {
+            adShowed = true;
+            AnalyticsService.instance.logInterstitialShown(adUnit: interstitialId);
+            _interstitialAd?.dispose();
+            _interstitialAd = null;
+            // Reload ONLY after it was shown/dismissed.
+            loadInterstitialAd();
+          },
+          onAdFailedToShowFullScreenContent: (ad, error) async {
+            adShowed = true;
+            _interstitialAd?.dispose();
+            _interstitialAd = null;
+            onRoute?.call();
+            // Do not reload here; next show attempt will trigger a load.
+          })
       ..show();
   }
 
@@ -215,8 +312,6 @@ class AdsControllerMain {
     BuildContext context, {
     required VoidCallback onRewardGranted,
   }) {
-    print("show Ads123 showRewardedAd");
-    
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -342,15 +437,29 @@ class AdsControllerMain {
     required VoidCallback onRewardGranted,
   }) {
     if (!_isRewardedReady || _rewardedAd == null) {
+      adShowed = true;
       // Ad not ready — grant access anyway so user isn't blocked
       loadRewardedAd();
       onRewardGranted();
       return;
     }
 
+    // Cross-format guard: extremely rare (App Open showing at the exact
+    // moment the user tapped "watch ad"). Since the user explicitly asked
+    // for this reward, never leave them blocked — grant it directly.
+    if (!_canShowAnyFullScreenAd) {
+      onRewardGranted();
+      return;
+    }
+
     _rewardedAd!
       ..fullScreenContentCallback = FullScreenContentCallback(
+        onAdShowedFullScreenContent: (ad) {
+          adShowed = false;
+          _lastFullScreenAdShownAt = DateTime.now();
+        },
         onAdDismissedFullScreenContent: (_) {
+          adShowed = true;
           _isRewardedReady = false;
           _rewardedAd?.dispose();
           _rewardedAd = null;
@@ -358,6 +467,7 @@ class AdsControllerMain {
           loadRewardedAd();
         },
         onAdFailedToShowFullScreenContent: (_, __) {
+          adShowed = true;
           _isRewardedReady = false;
           _rewardedAd?.dispose();
           _rewardedAd = null;
@@ -383,8 +493,6 @@ class AdsControllerMain {
   BannerAd? get bannerAd => _bannerAd;
 
   Future<void> loadBannerAdOnce() async {
-    print("load Ads123 loadBannerAdOnce");
-    
     if (!await _ensureMobileAdsReady()) return;
     if (bannerLoaded.value || _isBannerLoading || _bannerAd != null) return;
     _isBannerLoading = true;
@@ -442,9 +550,10 @@ class AdsControllerMain {
   }
 
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _interstitialAd?.dispose();
     _rewardedAd?.dispose();
-    _appOpenAd?.dispose();
+    appOpenAd?.dispose();
     _bannerAd?.dispose();
   }
 }
@@ -459,7 +568,6 @@ class AdsBannerWidget extends StatefulWidget {
 }
 
 class _AdsBannerWidgetState extends State<AdsBannerWidget> {
-
   BannerAd? _bannerAd;
   bool _loaded = false;
 
@@ -492,7 +600,6 @@ class _AdsBannerWidgetState extends State<AdsBannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     if (!_loaded || _bannerAd == null) {
       return const SizedBox();
     }
@@ -501,6 +608,136 @@ class _AdsBannerWidgetState extends State<AdsBannerWidget> {
       width: _bannerAd!.size.width.toDouble(),
       height: _bannerAd!.size.height.toDouble(),
       child: AdWidget(ad: _bannerAd!),
+    );
+  }
+}
+
+// ── Native Ad Widget ────────────────────────────────────────────────
+enum NativeAdTemplateType { small, medium }
+
+/// A reusable, self-contained Native Ad. Drop it into a `ListView`, an
+/// article page, or between content sections — it manages its own
+/// load/loading/error state and disposes its `NativeAd` correctly.
+class NativeAdWidget extends StatefulWidget {
+  final NativeAdTemplateType templateType;
+  final double? height;
+  final EdgeInsetsGeometry margin;
+  final BorderRadiusGeometry borderRadius;
+  final Color? backgroundColor;
+
+  /// Optional custom loading placeholder. Defaults to a subtle container
+  /// with a small spinner.
+  final WidgetBuilder? loadingBuilder;
+
+  /// Optional custom "failed to load" placeholder. Defaults to collapsing
+  /// to nothing so a failed ad never leaves a visible gap in your layout.
+  final WidgetBuilder? errorBuilder;
+
+  const NativeAdWidget({
+    super.key,
+    this.templateType = NativeAdTemplateType.medium,
+    this.height,
+    this.margin = const EdgeInsets.symmetric(vertical: 10),
+    this.borderRadius = const BorderRadius.all(Radius.circular(16)),
+    this.backgroundColor,
+    this.loadingBuilder,
+    this.errorBuilder,
+  });
+
+  @override
+  State<NativeAdWidget> createState() => _NativeAdWidgetState();
+}
+
+class _NativeAdWidgetState extends State<NativeAdWidget> {
+  NativeAd? _nativeAd;
+  bool _isLoaded = false;
+  bool _failed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAd();
+  }
+
+  void _loadAd() {
+    NativeAd(
+      adUnitId: nativeAdId,
+      request: const AdRequest(),
+      nativeTemplateStyle: NativeTemplateStyle(
+        templateType: widget.templateType == NativeAdTemplateType.small
+            ? TemplateType.small
+            : TemplateType.medium,
+        mainBackgroundColor: widget.backgroundColor ?? Colors.transparent,
+        cornerRadius: 16,
+      ),
+      listener: NativeAdListener(
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose(); // widget was removed before the ad came back
+            return;
+          }
+          setState(() {
+            _nativeAd = ad as NativeAd;
+            _isLoaded = true;
+            _failed = false;
+          });
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          if (!mounted) return;
+          setState(() {
+            _nativeAd = null;
+            _isLoaded = false;
+            _failed = true;
+          });
+        },
+      ),
+    ).load();
+  }
+
+  @override
+  void dispose() {
+    _nativeAd?.dispose();
+    super.dispose();
+  }
+
+  double get _defaultHeight =>
+      widget.templateType == NativeAdTemplateType.small ? 100 : 320;
+
+  @override
+  Widget build(BuildContext context) {
+    if (_failed) {
+      // Fail silently: never leave a broken box in the middle of content.
+      return widget.errorBuilder?.call(context) ?? const SizedBox.shrink();
+    }
+
+    if (!_isLoaded || _nativeAd == null) {
+      return widget.loadingBuilder?.call(context) ?? _defaultLoadingPlaceholder();
+    }
+
+    return Container(
+      height: widget.height ?? _defaultHeight,
+      margin: widget.margin,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(borderRadius: widget.borderRadius),
+      child: AdWidget(ad: _nativeAd!),
+    );
+  }
+
+  Widget _defaultLoadingPlaceholder() {
+    return Container(
+      height: widget.height ?? _defaultHeight,
+      margin: widget.margin,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.06),
+        borderRadius: widget.borderRadius,
+      ),
+      alignment: Alignment.center,
+      child: const SizedBox(
+        width: 22,
+        height: 22,
+        child: CircularProgressIndicator(strokeWidth: 2),
+      ),
     );
   }
 }
