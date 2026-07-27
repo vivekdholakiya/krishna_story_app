@@ -25,19 +25,19 @@ const String playStoreUrl =
 
 // ── Ad Unit IDs ──────────────────────────────────────────────────
 
-// const String interstitialId = 'ca-app-pub-8791243074795894/7940378110';
-// const String rewardedAdId = 'ca-app-pub-8791243074795894/6627296447';
-// const String bannerAdId = 'ca-app-pub-8791243074795894/5576540829';
-// const String openAdId = 'ca-app-pub-8791243074795894/5576540829';
-// const String nativeAdId = 'ca-app-pub-8791243074795894/5576540829';
+const String interstitialId = 'ca-app-pub-8791243074795894/7940378110';
+const String rewardedAdId = 'ca-app-pub-8791243074795894/6627296447';
+const String bannerAdId = 'ca-app-pub-8791243074795894/5576540829';
+const String openAdId = 'ca-app-pub-8791243074795894/4123208297';
+const String nativeAdId = 'ca-app-pub-8791243074795894/8301407241';
 
 //── Test Ad Unit IDs ─────────────────────────────────────────────
 
-const String interstitialId = 'ca-app-pub-3940256099942544/1033173712';
-const String rewardedAdId = 'ca-app-pub-3940256099942544/5224354917';
-const String bannerAdId = 'ca-app-pub-3940256099942544/6300978111';
-const String openAdId = 'ca-app-pub-3940256099942544/9257395921';
-const String nativeAdId = 'ca-app-pub-3940256099942544/2247696110';
+// const String interstitialId = 'ca-app-pub-3940256099942544/1033173712';
+// const String rewardedAdId = 'ca-app-pub-3940256099942544/5224354917';
+// const String bannerAdId = 'ca-app-pub-3940256099942544/6300978111';
+// const String openAdId = 'ca-app-pub-3940256099942544/9257395921';
+// const String nativeAdId = 'ca-app-pub-3940256099942544/2247696110';
 
 // ── Data Cache ───────────────────────────────────────────────────
 
