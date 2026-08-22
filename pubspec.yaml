@@ -21,7 +21,7 @@ dependencies:
   url_launcher: ^6.2.5
   share_plus: ^10.0.2
   google_mobile_ads:
-  connectivity_plus:
+  connectivity_plus: 6.1.5
   internet_connection_checker_plus:
   package_info_plus:
   firebase_core: ^4.5.0

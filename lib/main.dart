@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:clarity_flutter/clarity_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,12 +19,20 @@ import 'services/review_service.dart';
 final internetService = InternetService();
 final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
 
-const firebaseOptions = FirebaseOptions(
+const FirebaseOptions androidFirebaseOptions = FirebaseOptions(
   apiKey: "AIzaSyDiPKRQK85AHvqnNpcF53Bvz1ZIDCMNKRI",
   appId: "1:291416346723:android:aca41430d576f6d6a32856",
   messagingSenderId: "291416346723",
   projectId: "krishna-story-app",
 );
+
+ const FirebaseOptions iosFirebaseOptions = FirebaseOptions(
+  apiKey: 'AIzaSyDs9dVi3eJkbYY5kXV2e1R8a5oy_4ttM0o',
+  appId: '1:291416346723:ios:baa7fe2d3a51c4dea32856',
+  messagingSenderId: '291416346723',
+  projectId: 'krishna-story-app',
+);
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,17 +41,15 @@ Future<void> main() async {
 
   selectedLanguage = prefs.getString('selectedLanguage') ?? 'hu';
 
-  await Firebase.initializeApp(options: firebaseOptions);
-
+  await Firebase.initializeApp(
+    options: Platform.isIOS
+        ? iosFirebaseOptions
+        : androidFirebaseOptions,
+  );
   await MobileAds.instance.initialize();
 
   AdsControllerMain.markMobileAdsInitialized();
 
-  // Touching `adsControllerVar` here forces its constructor to run now
-  // (Dart top-level `final`s are lazily created on first use). That
-  // constructor attaches the App Open lifecycle observer and kicks off
-  // the first App Open ad preload — must run after
-  // MobileAds.instance.initialize().
   adsControllerVar.loadAppOpenAd();
 
   final notificationService = NotificationService();
