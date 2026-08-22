@@ -75,7 +75,6 @@ app.*.map.json
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
-**/ios/Flutter/.last_build_id
 **/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
 **/ios/Flutter/Flutter.podspec
@@ -86,12 +85,7 @@ app.*.map.json
 **/ios/Flutter/flutter_assets/
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
 
-# Firebase
-google-services.json
-GoogleService-Info.plist
-firebase_options.dart.bak
 
 # Coverage
 coverage/
