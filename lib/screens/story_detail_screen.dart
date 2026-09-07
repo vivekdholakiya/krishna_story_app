@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -534,10 +532,12 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
                 children: [
                   _buildHeader(),
                   Expanded(child: _buildContent(moral)),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: context.responsiveSize(16)),
 
-                  child: _buildAudioBar()),
+                if (Platform.isAndroid || selectedLanguage != 'gu')
+                  Container(
+                      margin: EdgeInsets.symmetric(horizontal: context.responsiveSize(16)),
+
+                      child: _buildAudioBar()),
 
                 ],
               ),
@@ -880,7 +880,9 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               /// BACKWARD
+              if(selectedLanguage == 'hu')
               _audioControlButton(
                 icon: Icons.replay_10_rounded,
                 onTap: () async {
@@ -950,6 +952,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
               SizedBox(width: context.responsiveSize(16)),
 
               /// FORWARD
+              if(selectedLanguage == 'hu')
               _audioControlButton(
                 icon: Icons.forward_10_rounded,
                 onTap: () async {

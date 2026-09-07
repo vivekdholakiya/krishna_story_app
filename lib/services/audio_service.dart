@@ -13,6 +13,7 @@ import 'audio_manifest.dart';
 
 class AudioService {
   AudioService._();
+
   static final AudioService instance = AudioService._();
 
   static const String _cacheDirName = 'audio_cache';
@@ -57,8 +58,7 @@ class AudioService {
 
   Future<File?> _download(String url, File target) async {
     try {
-      final resp =
-          await http.get(Uri.parse(url)).timeout(_downloadTimeout);
+      final resp = await http.get(Uri.parse(url)).timeout(_downloadTimeout);
       if (resp.statusCode != 200) return null;
       await target.parent.create(recursive: true);
       await target.writeAsBytes(resp.bodyBytes, flush: true);
@@ -86,9 +86,7 @@ class AudioService {
     if (segments.length >= 2) {
       return '${segments[segments.length - 2]}_${segments.last}';
     }
-    return segments.isNotEmpty
-        ? segments.last
-        : url.hashCode.toRadixString(16);
+    return segments.isNotEmpty ? segments.last : url.hashCode.toRadixString(16);
   }
 
   /// Deletes every cached audio file. Returns `(bytesFreed, filesCleared)`.

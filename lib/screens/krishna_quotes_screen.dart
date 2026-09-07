@@ -83,7 +83,7 @@ class _KrishnaQuotesScreenState extends State<KrishnaQuotesScreen>
 
     final text = quote[selectedLanguage] ?? quote['en'];
     final suffix = suffixMap[selectedLanguage] ?? '- Lord Krishna';
-    final shareText = '$text $suffix\n\n${shareDes[selectedLanguage]}\n\n$playStoreUrl';
+    final shareText = '$text $suffix\n\n${shareDes[selectedLanguage]}\n\n$appShareUrl';
 
     _tapCount++;
     if (_tapCount >= 3) {

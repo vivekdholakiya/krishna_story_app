@@ -15,6 +15,7 @@ import 'package:path_provider/path_provider.dart';
 ///      the app works on first launch with no network.
 class AudioManifest {
   AudioManifest._();
+
   static final AudioManifest instance = AudioManifest._();
 
   static const String _remoteUrl =
@@ -29,6 +30,7 @@ class AudioManifest {
   String? _format;
 
   Future<void> get ready => _ready.future;
+
   bool get isLoaded => _ready.isCompleted;
 
   /// Initiate load. Safe to call multiple times — only the first call does work.
@@ -81,8 +83,7 @@ class AudioManifest {
 
   Future<void> _refreshFromNetwork() async {
     try {
-      final resp =
-          await http.get(Uri.parse(_remoteUrl)).timeout(_httpTimeout);
+      final resp = await http.get(Uri.parse(_remoteUrl)).timeout(_httpTimeout);
       if (resp.statusCode != 200) return;
       final body = resp.body;
       _parse(body);
@@ -102,7 +103,10 @@ class AudioManifest {
         if (value is Map) {
           final url = value['url'] as String?;
           if (url == null || url.isEmpty) return;
-          next[key] = _Entry(url: url, voice: (value['voice'] as String?) ?? '');
+          next[key] = _Entry(
+            url: url,
+            voice: (value['voice'] as String?) ?? '',
+          );
         }
       });
       if (next.isNotEmpty) {
@@ -123,18 +127,22 @@ class AudioManifest {
 
   // Exposed for tests / debugging.
   String? get baseUrl => _baseUrl;
+
   String? get format => _format;
+
   int get entryCount => _entries.length;
 }
 
 class AudioEntry {
   final String url;
   final String voice;
+
   const AudioEntry({required this.url, required this.voice});
 }
 
 class _Entry {
   final String url;
   final String voice;
+
   const _Entry({required this.url, required this.voice});
 }

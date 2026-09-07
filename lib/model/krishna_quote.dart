@@ -21,11 +21,15 @@ class KrishnaQuote {
   /// Factory constructor to parse a single quote item from the JSON structure
   factory KrishnaQuote.fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) {
-      throw const FormatException('Empty JSON object encountered when parsing KrishnaQuote');
+      throw const FormatException(
+        'Empty JSON object encountered when parsing KrishnaQuote',
+      );
     }
     // Since the key is dynamic (e.g. "1", "2", "3"), we extract the first key and its value
     final String key = json.keys.first;
-    final Map<String, dynamic> translations = Map<String, dynamic>.from(json[key] as Map);
+    final Map<String, dynamic> translations = Map<String, dynamic>.from(
+      json[key] as Map,
+    );
 
     return KrishnaQuote(
       id: key,
@@ -41,13 +45,13 @@ class KrishnaQuote {
   String get displayQuote {
     switch (selectedLanguage) {
       case 'en':
-        return english.isNotEmpty  ? english   : _fallback;
+        return english.isNotEmpty ? english : _fallback;
       case 'gu':
-        return gujarati.isNotEmpty ? gujarati  : _fallback;
-      case 'hu':                          // was 'hu'
-        return hindi.isNotEmpty    ? hindi     : _fallback;
+        return gujarati.isNotEmpty ? gujarati : _fallback;
+      case 'hu': // was 'hu'
+        return hindi.isNotEmpty ? hindi : _fallback;
       case 'sa':
-        return sanskrit.isNotEmpty ? sanskrit  : _fallback;
+        return sanskrit.isNotEmpty ? sanskrit : _fallback;
       default:
         return _fallback;
     }
@@ -56,21 +60,16 @@ class KrishnaQuote {
   /// Falls back through all languages in priority order if the
   /// selected language field is empty.
   String get _fallback {
-    if (english.isNotEmpty)   return english;
-    if (hindi.isNotEmpty)     return hindi;
-    if (gujarati.isNotEmpty)  return gujarati;
-    if (sanskrit.isNotEmpty)  return sanskrit;
+    if (english.isNotEmpty) return english;
+    if (hindi.isNotEmpty) return hindi;
+    if (gujarati.isNotEmpty) return gujarati;
+    if (sanskrit.isNotEmpty) return sanskrit;
     return '';
   }
 
   Map<String, dynamic> toJson() {
     return {
-      id: {
-        'en': english,
-        'gu': gujarati,
-        'hu': hindi,
-        'sa': sanskrit,
-      }
+      id: {'en': english, 'gu': gujarati, 'hu': hindi, 'sa': sanskrit},
     };
   }
 
@@ -87,13 +86,17 @@ class KrishnaQuotesContainer {
   factory KrishnaQuotesContainer.fromJson(Map<String, dynamic> json) {
     final List<dynamic> list = json['krishnaQuotes'] as List<dynamic>? ?? [];
     final List<KrishnaQuote> parsedQuotes = list
-        .map((item) => KrishnaQuote.fromJson(Map<String, dynamic>.from(item as Map)))
+        .map(
+          (item) =>
+              KrishnaQuote.fromJson(Map<String, dynamic>.from(item as Map)),
+        )
         .toList();
     return KrishnaQuotesContainer(quotes: parsedQuotes);
   }
 
   factory KrishnaQuotesContainer.parseJsonString(String jsonString) {
-    final Map<String, dynamic> decoded = json.decode(jsonString) as Map<String, dynamic>;
+    final Map<String, dynamic> decoded =
+        json.decode(jsonString) as Map<String, dynamic>;
     return KrishnaQuotesContainer.fromJson(decoded);
   }
 }

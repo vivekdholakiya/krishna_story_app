@@ -97,7 +97,7 @@ class _SettingScreenState extends State<SettingScreen>
   Future<void> _shareApp() async {
     try {
       await Share.share(
-          '${shareDes[selectedLanguage]}\n\n$playStoreUrl',
+          '${shareDes[selectedLanguage]}\n\n$appShareUrl',
           subject: appName[selectedLanguage]);
     } catch (e) {
       if (mounted) {

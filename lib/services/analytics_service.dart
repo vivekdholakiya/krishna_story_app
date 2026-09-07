@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 
 class AnalyticsService {
   AnalyticsService._();
+
   static final AnalyticsService instance = AnalyticsService._();
 
   final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
@@ -26,23 +27,14 @@ class AnalyticsService {
   }) {
     return _analytics.logEvent(
       name: 'ad_impression',
-      parameters: {
-        'ad_unit': adUnit,
-        'ad_format': adFormat,
-      },
+      parameters: {'ad_unit': adUnit, 'ad_format': adFormat},
     );
   }
 
-  Future<void> logAdClick({
-    required String adUnit,
-    required String adFormat,
-  }) {
+  Future<void> logAdClick({required String adUnit, required String adFormat}) {
     return _analytics.logEvent(
       name: 'ad_click',
-      parameters: {
-        'ad_unit': adUnit,
-        'ad_format': adFormat,
-      },
+      parameters: {'ad_unit': adUnit, 'ad_format': adFormat},
     );
   }
 
@@ -64,21 +56,19 @@ class AnalyticsService {
   Future<void> logInterstitialShown({required String adUnit}) {
     return _analytics.logEvent(
       name: 'interstitial_shown',
-      parameters: {
-        'ad_unit': adUnit,
-      },
+      parameters: {'ad_unit': adUnit},
     );
   }
 
   /// Generic event logger for ad-hoc events (e.g. audio playback analytics).
   /// Firebase requires parameter values to be String, num, or bool — nulls are dropped.
-// AFTER:
+  // AFTER:
   Future<void> logCustomEvent(String name, Map<String, Object?> params) {
     final cleaned = <String, Object>{};
     params.forEach((k, v) {
       if (v == null) return;
       // Firebase accepts only String or num — convert bool to 1/0
-      cleaned[k] = v is bool ? (v ? 1 : 0) : v;  // ✅
+      cleaned[k] = v is bool ? (v ? 1 : 0) : v; // ✅
     });
     return _analytics.logEvent(name: name, parameters: cleaned);
   }
@@ -171,4 +161,3 @@ class AnalyticsService {
     });
   }
 }
-

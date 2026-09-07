@@ -17,7 +17,6 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({super.key});
 
@@ -38,7 +37,9 @@ class _MainHomeScreenState extends State<MainHomeScreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 800), vsync: this);
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
@@ -55,10 +56,11 @@ class _MainHomeScreenState extends State<MainHomeScreen>
   // ── NEW ──────────────────────────────────────────
   Future<void> _loadDailyQuote() async {
     try {
-      final String jsonString =
-      await rootBundle.loadString('assets/krishnaQuotes2.json');
+      final String jsonString = await rootBundle.loadString(
+        'assets/krishnaQuotes2.json',
+      );
       final KrishnaQuotesContainer container =
-      KrishnaQuotesContainer.parseJsonString(jsonString);
+          KrishnaQuotesContainer.parseJsonString(jsonString);
       if (container.quotes.isNotEmpty) {
         // Use today's date as seed so same quote shows all day
         final int todayIndex =
@@ -69,13 +71,13 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       debugPrint('Failed to load daily quote: $e');
     }
   }
+
   // ─────────────────────────────────────────────────
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,27 +107,36 @@ class _MainHomeScreenState extends State<MainHomeScreen>
   Widget _buildHeader() {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveSize(18),
-          vertical: context.responsiveSize(12)),
+        horizontal: context.responsiveSize(18),
+        vertical: context.responsiveSize(12),
+      ),
       child: Column(
         children: [
           // Logo image — no debug tap handler
           Image.asset(
             'assets/images/setting_first.png',
-            height: context.responsiveSize(MediaQuery.sizeOf(context).height * 0.28),
+            height: context.responsiveSize(
+              MediaQuery.sizeOf(context).height * 0.28,
+            ),
           ),
           SizedBox(height: context.responsiveSize(10)),
-          Text(krishna[selectedLanguage],
-              style: TextStyle(
-                  fontSize: context.responsiveFontSize(36),
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  letterSpacing: 1.2)),
-          Text(the_ethernal_story[selectedLanguage],
-              style: TextStyle(
-                  fontSize: context.responsiveFontSize(22),
-                  fontWeight: FontWeight.w500,
-                  color: const Color(0xFFFFD36A))),
+          Text(
+            krishna[selectedLanguage],
+            style: TextStyle(
+              fontSize: context.responsiveFontSize(36),
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 1.2,
+            ),
+          ),
+          Text(
+            the_ethernal_story[selectedLanguage],
+            style: TextStyle(
+              fontSize: context.responsiveFontSize(22),
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFFFFD36A),
+            ),
+          ),
         ],
       ),
     );
@@ -137,16 +148,25 @@ class _MainHomeScreenState extends State<MainHomeScreen>
         icon: 'assets/images/story.png',
         title: devine_krishna_leelas[selectedLanguage],
         subtitle: begin_divine_leelas_of_lord_krishna[selectedLanguage],
-        onTap: () => Navigator.push(context,
-            MaterialPageRoute(builder: (_) => CategoryScreen())),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => CategoryScreen()),
+        ),
       ),
       _Option(
         icon: 'assets/images/fav.png',
         title: favourite_stories[selectedLanguage],
         subtitle: your_most_loved_krishna_tales[selectedLanguage],
         onTap: () {
-          adsControllerVar.showInterstititalAd(context, onRoute: () {Navigator.push(context,
-              MaterialPageRoute(builder: (_) => FavoritesScreen()));});
+          adsControllerVar.showInterstititalAd(
+            context,
+            onRoute: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => FavoritesScreen()),
+              );
+            },
+          );
         },
       ),
       _Option(
@@ -154,19 +174,32 @@ class _MainHomeScreenState extends State<MainHomeScreen>
         title: Krishnas_Quotes[selectedLanguage],
         subtitle: divine_thoughts_and_teachings_of_Krishna[selectedLanguage],
         onTap: () {
-          adsControllerVar.showInterstititalAd(context, onRoute: () {Navigator.push(context,
-              MaterialPageRoute(builder: (_) => KrishnaQuotesScreen()));});
-
+          adsControllerVar.showInterstititalAd(
+            context,
+            onRoute: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => KrishnaQuotesScreen()),
+              );
+            },
+          );
         },
       ),
       _Option(
         icon: 'assets/images/setting.png',
         title: Sacred_Settings[selectedLanguage],
-        subtitle: personalize_your_spiritual_reading_experience[selectedLanguage],
+        subtitle:
+            personalize_your_spiritual_reading_experience[selectedLanguage],
         onTap: () {
-          adsControllerVar.showInterstititalAd(context, onRoute: () {Navigator.push(context,
-              MaterialPageRoute(builder: (_) => SettingScreen()));});
-
+          adsControllerVar.showInterstititalAd(
+            context,
+            onRoute: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SettingScreen()),
+              );
+            },
+          );
         },
       ),
     ];
@@ -175,7 +208,8 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       padding: EdgeInsets.symmetric(horizontal: context.responsiveSize(22)),
       itemCount: options.length + 1, // +1 for bottom spacing
       itemBuilder: (context, i) {
-        if (i == options.length) return SizedBox(height: context.responsiveSize(30));
+        if (i == options.length)
+          return SizedBox(height: context.responsiveSize(30));
         return _buildOptionCard(options[i], i);
       },
     );
@@ -187,8 +221,9 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       duration: Duration(milliseconds: 500 + index * 120),
       curve: Curves.easeOutCubic,
       builder: (_, value, child) => Transform.translate(
-          offset: Offset(0, 20 * (1 - value)),
-          child: Opacity(opacity: value, child: child)),
+        offset: Offset(0, 20 * (1 - value)),
+        child: Opacity(opacity: value, child: child),
+      ),
       child: GestureDetector(
         onTap: opt.onTap,
         child: Container(
@@ -197,7 +232,9 @@ class _MainHomeScreenState extends State<MainHomeScreen>
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(context.responsiveSize(22)),
             border: Border.all(
-                color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.5),
+              color: const Color(0xFFFFD36A).withOpacity(0.35),
+              width: 1.5,
+            ),
           ),
           child: Padding(
             padding: EdgeInsets.all(context.responsiveSize(14)),
@@ -209,24 +246,32 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(opt.title,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.responsiveFontSize(18),
-                              fontWeight: FontWeight.w700)),
+                      Text(
+                        opt.title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: context.responsiveFontSize(18),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                       SizedBox(height: context.responsiveSize(4)),
-                      Text(opt.subtitle,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.white.withOpacity(0.85),
-                              fontSize: context.responsiveSize(13))),
+                      Text(
+                        opt.subtitle,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.85),
+                          fontSize: context.responsiveSize(13),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Icon(Icons.arrow_forward_ios,
-                    color: const Color(0xFFFFD36A),
-                    size: context.responsiveSize(18)),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: const Color(0xFFFFD36A),
+                  size: context.responsiveSize(18),
+                ),
               ],
             ),
           ),
@@ -234,8 +279,6 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       ),
     );
   }
-
-
 
   Widget _buildDailyQuoteCard() {
     final quote = _dailyQuote!;
@@ -264,7 +307,6 @@ class _MainHomeScreenState extends State<MainHomeScreen>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-
               // ── Header ────────────────────────────
               Container(
                 padding: EdgeInsets.symmetric(
@@ -284,9 +326,11 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.auto_awesome,
-                        color: const Color(0xFFFFD36A),
-                        size: context.responsiveSize(15)),
+                    Icon(
+                      Icons.auto_awesome,
+                      color: const Color(0xFFFFD36A),
+                      size: context.responsiveSize(15),
+                    ),
                     SizedBox(width: context.responsiveSize(6)),
                     Text(
                       DailyQuote[selectedLanguage] ?? 'Daily Quote',
@@ -310,15 +354,18 @@ class _MainHomeScreenState extends State<MainHomeScreen>
                           gradient: const LinearGradient(
                             colors: [Color(0xFFFFD36A), Color(0xFFFFB700)],
                           ),
-                          borderRadius:
-                          BorderRadius.circular(context.responsiveSize(20)),
+                          borderRadius: BorderRadius.circular(
+                            context.responsiveSize(20),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.share,
-                                color: const Color(0xFF0B1A3A),
-                                size: context.responsiveSize(13)),
+                            Icon(
+                              Icons.share,
+                              color: const Color(0xFF0B1A3A),
+                              size: context.responsiveSize(13),
+                            ),
                             SizedBox(width: context.responsiveSize(4)),
                             Text(
                               Share_text[selectedLanguage] ?? 'Share',
@@ -387,14 +434,17 @@ class _MainHomeScreenState extends State<MainHomeScreen>
       ),
     );
   }
+
   Future<void> _shareQuoteCard() async {
     try {
-      final RenderRepaintBoundary boundary = _quoteCardKey.currentContext!
-          .findRenderObject() as RenderRepaintBoundary;
+      final RenderRepaintBoundary boundary =
+          _quoteCardKey.currentContext!.findRenderObject()
+              as RenderRepaintBoundary;
 
       final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
-      final ByteData? byteData =
-      await image.toByteData(format: ui.ImageByteFormat.png);
+      final ByteData? byteData = await image.toByteData(
+        format: ui.ImageByteFormat.png,
+      );
       if (byteData == null) return;
 
       final Uint8List pngBytes = byteData.buffer.asUint8List();
@@ -404,14 +454,13 @@ class _MainHomeScreenState extends State<MainHomeScreen>
 
       await Share.shareXFiles(
         [XFile(file.path)],
-        text: '🙏 ${_dailyQuote?.displayQuote ?? ''}\n\nKrishna: The Eternal Story',
+        text:
+            '🙏 ${_dailyQuote?.displayQuote ?? ''}\n\nKrishna: The Eternal Story',
       );
     } catch (e) {
       debugPrint('Share error: $e');
     }
   }
-
-
 }
 
 class _Option {
@@ -419,11 +468,11 @@ class _Option {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
-  const _Option(
-      {required this.icon,
-      required this.title,
-      required this.subtitle,
-      required this.onTap});
+
+  const _Option({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
 }
-
-

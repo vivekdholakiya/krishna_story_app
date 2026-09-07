@@ -12,10 +12,12 @@ import 'main_home_screen.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
   final bool isBack;
+
   const LanguageSelectionScreen({super.key, required this.isBack});
 
   @override
-  State<LanguageSelectionScreen> createState() => _LanguageSelectionScreenState();
+  State<LanguageSelectionScreen> createState() =>
+      _LanguageSelectionScreenState();
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
@@ -51,10 +53,10 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
     // 2. Navigate
     void goHome() => Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => MainHomeScreen()),
-          (route) => false,
-        );
+      context,
+      MaterialPageRoute(builder: (_) => MainHomeScreen()),
+      (route) => false,
+    );
 
     if (widget.isBack) {
       adsControllerVar.showInterstititalAd(context, onRoute: goHome);
@@ -85,8 +87,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   Widget _buildHeader() {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveSize(20),
-          vertical: context.responsiveSize(16)),
+        horizontal: context.responsiveSize(20),
+        vertical: context.responsiveSize(16),
+      ),
       child: Row(
         children: [
           if (widget.isBack)
@@ -96,12 +99,18 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                 padding: EdgeInsets.all(context.responsiveSize(10)),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(context.responsiveSize(14)),
+                  borderRadius: BorderRadius.circular(
+                    context.responsiveSize(14),
+                  ),
                   border: Border.all(
-                      color: const Color(0xFFFFD36A).withOpacity(0.4)),
+                    color: const Color(0xFFFFD36A).withOpacity(0.4),
+                  ),
                 ),
-                child: Icon(Icons.arrow_back,
-                    color: Colors.white, size: context.responsiveSize(24)),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: context.responsiveSize(24),
+                ),
               ),
             ),
           if (widget.isBack) SizedBox(width: context.responsiveSize(16)),
@@ -127,19 +136,37 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
       child: Column(
         children: [
           SizedBox(height: context.responsiveSize(10)),
-          Image.asset('assets/images/change_lng.png',
-              height: context.responsiveSize(230), fit: BoxFit.contain),
+          Image.asset(
+            'assets/images/change_lng.png',
+            height: context.responsiveSize(230),
+            fit: BoxFit.contain,
+          ),
           SizedBox(height: context.responsiveSize(14)),
-          Text(chooseYourLanguage["en"],
-              style: TextStyle(
-                  fontSize: context.responsiveFontSize(26),
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFFFFD36A))),
+          Text(
+            chooseYourLanguage["en"],
+            style: TextStyle(
+              fontSize: context.responsiveFontSize(26),
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFFFFD36A),
+            ),
+          ),
           if (!widget.isBack) ...[
-            const Text('તમારી ભાષા પસંદ કરો',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFFFD36A))),
-            const Text('अपनी भाषा चुनें',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFFFD36A))),
+            const Text(
+              'તમારી ભાષા પસંદ કરો',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFFFD36A),
+              ),
+            ),
+            const Text(
+              'अपनी भाषा चुनें',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFFFD36A),
+              ),
+            ),
           ],
           SizedBox(height: context.responsiveSize(!widget.isBack ? 10 : 20)),
           ...languageFiles.keys.map((lang) => _buildLanguageCard(lang)),
@@ -152,8 +179,9 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   Widget _buildLanguageCard(String language) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveSize(24),
-          vertical: context.responsiveSize(10)),
+        horizontal: context.responsiveSize(24),
+        vertical: context.responsiveSize(10),
+      ),
       child: GestureDetector(
         onTap: () => _selectLanguage(language),
         child: Container(
@@ -163,15 +191,20 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
             color: Colors.white.withOpacity(0.12),
             borderRadius: BorderRadius.circular(context.responsiveSize(18)),
             border: Border.all(
-                color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.5),
+              color: const Color(0xFFFFD36A).withOpacity(0.35),
+              width: 1.5,
+            ),
           ),
           child: Center(
-            child: Text(language,
-                style: TextStyle(
-                    fontSize: context.responsiveFontSize(20),
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.6)),
+            child: Text(
+              language,
+              style: TextStyle(
+                fontSize: context.responsiveFontSize(20),
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.6,
+              ),
+            ),
           ),
         ),
       ),

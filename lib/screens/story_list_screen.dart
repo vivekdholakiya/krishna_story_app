@@ -97,7 +97,7 @@ class _StoriesListScreenState extends State<StoriesListScreen>
   bool get _isLocked => false; // first 3 free, rest locked — logic below
 
   void _openStory(int index, String title, String content, String key) {
-    final wasAdGated = index > 2;
+    final wasAdGated = index > 1;
     AnalyticsService.instance.logStoryTap(
       storyKey: key,
       categoryIndex: widget.categoryIndex,

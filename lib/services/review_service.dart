@@ -23,8 +23,8 @@ class ReviewService {
   // Smart trigger configuration constants
   static const int _minLaunchCount = 1;
   static const int _minEngagementCount = 3;
-  static const int _minDaysSinceFirstLaunch = 0; // Prompt only after at least 3 days of usage
-  static const int _cooldownDays = 3;        // Cooldown period between prompts to prevent spam (14 days)
+  static const int _cooldownDays = 3;        // Cooldown period between prompts to prevent spam (3 days)
+  static const String _appStoreId = '6742337678';
 
   /// Initializes the service, registers a new launch, and sets up tracking state.
   /// Should be called on app startup.
@@ -118,7 +118,7 @@ class ReviewService {
   }
 
   /// Triggers the native in-app review flow.
-  /// Automatically falls back to the Google Play Store listing page if unavailable.
+  /// Automatically falls back to the Store listing page if unavailable.
   Future<void> requestReview() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -130,7 +130,7 @@ class ReviewService {
       final bool isNativeFlowAvailable = await _inAppReview.isAvailable();
 
       if (isNativeFlowAvailable) {
-        log('Native Google Play in-app review flow is available. Launching...', name: 'ReviewService');
+        log('Native in-app review flow is available. Launching...', name: 'ReviewService');
         await _inAppReview.requestReview();
         // Set hasReviewed to true because requestReview is complete
         await prefs.setBool(_keyHasReviewed, true);
@@ -146,12 +146,11 @@ class ReviewService {
     }
   }
 
-  /// Direct fallback to open the app's Google Play Store listing page.
-  /// Does not require hardcoding package names, as the plugin auto-detects it.
+  /// Direct fallback to open the app's Store listing page.
   Future<void> openStoreListing() async {
     try {
       log('Opening store listing page directly.', name: 'ReviewService');
-      await _inAppReview.openStoreListing();
+      await _inAppReview.openStoreListing(appStoreId: _appStoreId);
       
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_keyHasReviewed, true); // Mark as reviewed to prevent subsequent dialog prompts

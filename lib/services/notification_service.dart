@@ -105,29 +105,41 @@ class NotificationService {
           _localNotificationsPlugin.resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>();
 
-      bool androidGranted = false;
       if (androidImplementation != null) {
-        androidGranted =
+        final bool androidGranted =
             await androidImplementation.requestNotificationsPermission() ?? false;
 
         final bool? exactAlarmGranted =
-        await androidImplementation.requestExactAlarmsPermission();
+            await androidImplementation.requestExactAlarmsPermission();
         developer.log(
           'Exact alarm permission granted: $exactAlarmGranted',
           name: 'NotificationService',
         );
-        // ───────────────────────────────────────────────────────────────────
-
         developer.log(
           'Android notification permission status: $androidGranted',
           name: 'NotificationService',
         );
-
+        return androidGranted;
       }
 
+      final IOSFlutterLocalNotificationsPlugin? iosImplementation =
+          _localNotificationsPlugin.resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>();
 
+      if (iosImplementation != null) {
+        final bool? iosGranted = await iosImplementation.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+        developer.log(
+          'iOS notification permission status: $iosGranted',
+          name: 'NotificationService',
+        );
+        return iosGranted ?? false;
+      }
 
-      return androidGranted;
+      return false;
     } catch (e) {
       developer.log('Failed to request permissions: $e', name: 'NotificationService');
       return false;
@@ -137,9 +149,9 @@ class NotificationService {
   Future<List<KrishnaQuote>> _loadQuotesFromAsset() async {
     try {
       final String jsonString =
-      await rootBundle.loadString('assets/krishnaQuotes2.json');
+          await rootBundle.loadString('assets/krishnaQuotes2.json');
       final KrishnaQuotesContainer container =
-      KrishnaQuotesContainer.parseJsonString(jsonString);
+          KrishnaQuotesContainer.parseJsonString(jsonString);
       if (container.quotes.isNotEmpty) return container.quotes;
     } catch (e) {
       developer.log('Error loading quotes from asset (using fallback): $e',
@@ -158,11 +170,10 @@ class NotificationService {
         final bool canScheduleExact =
             await androidImpl.canScheduleExactNotifications() ?? false;
 
-
         if (canScheduleExact) return AndroidScheduleMode.inexactAllowWhileIdle;
       }
     } catch (e) {
-
+      developer.log('Exact schedule mode resolution error: $e', name: 'NotificationService');
     }
 
     // Safe fallback — works without any special permission

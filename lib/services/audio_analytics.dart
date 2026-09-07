@@ -41,13 +41,13 @@ class AudioAnalytics {
   });
 
   Map<String, Object?> get _common => {
-        'story_key': storyKey,
-        'category_id': categoryId,
-        'story_index': storyIndex,
-        'lang': lang,
-        'voice': voice,
-        'playback_mode': playbackMode,
-      };
+    'story_key': storyKey,
+    'category_id': categoryId,
+    'story_index': storyIndex,
+    'lang': lang,
+    'voice': voice,
+    'playback_mode': playbackMode,
+  };
 
   // --- Engagement funnel ---
 
@@ -70,7 +70,10 @@ class AudioAnalytics {
     for (final milestone in [25, 50, 75]) {
       if (pct >= milestone && !_milestonesReached.contains(milestone)) {
         _milestonesReached.add(milestone);
-        AnalyticsService.instance.logCustomEvent('audio_progress_$milestone', _common);
+        AnalyticsService.instance.logCustomEvent(
+          'audio_progress_$milestone',
+          _common,
+        );
       }
     }
   }
@@ -127,7 +130,10 @@ class AudioAnalytics {
     });
   }
 
-  void downloadFailed({required String errorType, required String errorDetail}) {
+  void downloadFailed({
+    required String errorType,
+    required String errorDetail,
+  }) {
     AnalyticsService.instance.logCustomEvent('audio_download_failed', {
       'story_key': storyKey,
       'lang': lang,
@@ -147,7 +153,10 @@ class AudioAnalytics {
 
   // --- Settings events (call without instantiating AudioAnalytics) ---
 
-  static void cacheCleared({required int bytesFreed, required int filesCleared}) {
+  static void cacheCleared({
+    required int bytesFreed,
+    required int filesCleared,
+  }) {
     AnalyticsService.instance.logCustomEvent('audio_cache_cleared', {
       'bytes_freed': bytesFreed,
       'files_cleared': filesCleared,

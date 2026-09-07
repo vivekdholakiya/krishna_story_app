@@ -36,7 +36,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     await _load();
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Removed from favorites'), duration: Duration(seconds: 1)));
+        const SnackBar(
+          content: Text('Removed from favorites'),
+          duration: Duration(seconds: 1),
+        ),
+      );
     }
   }
 
@@ -47,6 +51,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       await _load();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
@@ -78,20 +83,28 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(context.responsiveSize(14)),
-                border: Border.all(color: const Color(0xFFFFD36A).withOpacity(0.4)),
+                border: Border.all(
+                  color: const Color(0xFFFFD36A).withOpacity(0.4),
+                ),
               ),
-              child: Icon(Icons.arrow_back,
-                  color: Colors.white, size: context.responsiveSize(24)),
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: context.responsiveSize(24),
+              ),
             ),
           ),
           SizedBox(width: context.responsiveSize(16)),
           Expanded(
-            child: Text(FavoriteStories[selectedLanguage],
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: context.responsiveFontSize(24),
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.8)),
+            child: Text(
+              FavoriteStories[selectedLanguage],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: context.responsiveFontSize(24),
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.8,
+              ),
+            ),
           ),
           if (_favorites.isNotEmpty)
             GestureDetector(
@@ -100,10 +113,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 padding: EdgeInsets.all(context.responsiveSize(10)),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(context.responsiveSize(14)),
+                  borderRadius: BorderRadius.circular(
+                    context.responsiveSize(14),
+                  ),
                   border: Border.all(color: Colors.redAccent.withOpacity(0.6)),
                 ),
-                child: const Icon(Icons.delete_outline, color: Colors.redAccent),
+                child: const Icon(
+                  Icons.delete_outline,
+                  color: Colors.redAccent,
+                ),
               ),
             ),
         ],
@@ -113,27 +131,38 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   Widget _buildBody() {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator(color: Color(0xFFFFD36A)));
+      return const Center(
+        child: CircularProgressIndicator(color: Color(0xFFFFD36A)),
+      );
     }
     if (_favorites.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.favorite_border,
-                size: context.responsiveSize(80), color: const Color(0xFFFFD36A)),
+            Icon(
+              Icons.favorite_border,
+              size: context.responsiveSize(80),
+              color: const Color(0xFFFFD36A),
+            ),
             const SizedBox(height: 12),
-            Text(noFav[selectedLanguage],
-                style: TextStyle(
-                    fontSize: context.responsiveFontSize(20),
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600)),
+            Text(
+              noFav[selectedLanguage],
+              style: TextStyle(
+                fontSize: context.responsiveFontSize(20),
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const SizedBox(height: 8),
-            Text(noFavDes[selectedLanguage],
-                style: TextStyle(
-                    fontSize: context.responsiveFontSize(14),
-                    color: Colors.white70),
-                textAlign: TextAlign.center),
+            Text(
+              noFavDes[selectedLanguage],
+              style: TextStyle(
+                fontSize: context.responsiveFontSize(14),
+                color: Colors.white70,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       );
@@ -143,8 +172,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       color: const Color(0xFFFFD36A),
       onRefresh: _load,
       child: ListView.builder(
-        padding:
-            EdgeInsets.symmetric(horizontal: context.responsiveSize(20)),
+        padding: EdgeInsets.symmetric(horizontal: context.responsiveSize(20)),
         itemCount: _favorites.length,
         itemBuilder: (_, i) => _buildCard(_favorites[i], i),
       ),
@@ -162,8 +190,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           color: Colors.redAccent,
           borderRadius: BorderRadius.circular(context.responsiveSize(18)),
         ),
-        child: Icon(Icons.delete,
-            color: Colors.white, size: context.responsiveSize(30)),
+        child: Icon(
+          Icons.delete,
+          color: Colors.white,
+          size: context.responsiveSize(30),
+        ),
       ),
       onDismissed: (_) => _remove(story.storyKey),
       child: Container(
@@ -172,7 +203,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           color: Colors.white.withOpacity(0.12),
           borderRadius: BorderRadius.circular(context.responsiveSize(20)),
           border: Border.all(
-              color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.2),
+            color: const Color(0xFFFFD36A).withOpacity(0.35),
+            width: 1.2,
+          ),
         ),
         child: ListTile(
           onTap: () async {
@@ -194,24 +227,35 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           },
           leading: CircleAvatar(
             backgroundColor: const Color(0xFFFFD36A),
-            child: Text('${index + 1}',
-                style: TextStyle(
-                    color: const Color(0xFF0B1A3A),
-                    fontSize: context.responsiveFontSize(14),
-                    fontWeight: FontWeight.bold)),
+            child: Text(
+              '${index + 1}',
+              style: TextStyle(
+                color: const Color(0xFF0B1A3A),
+                fontSize: context.responsiveFontSize(14),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-          title: Text(story.title,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: context.responsiveFontSize(16))),
-          subtitle: Text(story.categoryName,
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: context.responsiveFontSize(14))),
-          trailing: Icon(Icons.arrow_forward_ios,
-              color: const Color(0xFFFFD36A),
-              size: context.responsiveSize(18)),
+          title: Text(
+            story.title,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: context.responsiveFontSize(16),
+            ),
+          ),
+          subtitle: Text(
+            story.categoryName,
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: context.responsiveFontSize(14),
+            ),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: const Color(0xFFFFD36A),
+            size: context.responsiveSize(18),
+          ),
         ),
       ),
     );

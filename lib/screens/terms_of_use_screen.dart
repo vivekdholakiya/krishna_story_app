@@ -22,18 +22,22 @@ class TermsOfUseScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.fromLTRB(
-                      context.responsiveSize(20),
-                      context.responsiveSize(10),
-                      context.responsiveSize(20),
-                      context.responsiveSize(40)),
+                    context.responsiveSize(20),
+                    context.responsiveSize(10),
+                    context.responsiveSize(20),
+                    context.responsiveSize(40),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Last Updated: January 2026',
-                          style: TextStyle(
-                              fontSize: context.responsiveFontSize(15),
-                              color: const Color(0xFFFFD36A).withOpacity(0.9),
-                              fontWeight: FontWeight.w500)),
+                      Text(
+                        'Last Updated: January 2026',
+                        style: TextStyle(
+                          fontSize: context.responsiveFontSize(15),
+                          color: const Color(0xFFFFD36A).withOpacity(0.9),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       SizedBox(height: context.responsiveSize(20)),
                       _termsCard(
                         context: context,
@@ -90,9 +94,10 @@ class TermsOfUseScreen extends StatelessWidget {
                           'Hari Om 🙏\nThank you for your trust',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: context.responsiveFontSize(18),
-                              color: const Color(0xFFFFD36A),
-                              fontWeight: FontWeight.w600),
+                            fontSize: context.responsiveFontSize(18),
+                            color: const Color(0xFFFFD36A),
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -119,7 +124,9 @@ class TermsOfUseScreen extends StatelessWidget {
         color: Colors.white.withOpacity(0.12),
         borderRadius: BorderRadius.circular(context.responsiveSize(20)),
         border: Border.all(
-            color: const Color(0xFFFFD36A).withOpacity(0.35), width: 1.3),
+          color: const Color(0xFFFFD36A).withOpacity(0.35),
+          width: 1.3,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,28 +137,39 @@ class TermsOfUseScreen extends StatelessWidget {
                 padding: EdgeInsets.all(context.responsiveSize(12)),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(context.responsiveSize(14)),
+                  borderRadius: BorderRadius.circular(
+                    context.responsiveSize(14),
+                  ),
                 ),
-                child: Icon(icon,
-                    color: Colors.white, size: context.responsiveSize(26)),
+                child: Icon(
+                  icon,
+                  color: Colors.white,
+                  size: context.responsiveSize(26),
+                ),
               ),
               SizedBox(width: context.responsiveSize(14)),
               Expanded(
-                child: Text(title,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: context.responsiveFontSize(19),
-                        fontWeight: FontWeight.bold)),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: context.responsiveFontSize(19),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 14),
-          Text(content,
-              style: TextStyle(
-                  color: Colors.white.withOpacity(0.92),
-                  fontSize: context.responsiveFontSize(15),
-                  height: 1.55,
-                  fontWeight: isImportant ? FontWeight.w500 : FontWeight.normal)),
+          Text(
+            content,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.92),
+              fontSize: context.responsiveFontSize(15),
+              height: 1.55,
+              fontWeight: isImportant ? FontWeight.w500 : FontWeight.normal,
+            ),
+          ),
         ],
       ),
     );

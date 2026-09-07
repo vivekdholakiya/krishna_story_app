@@ -31,7 +31,9 @@ class _CategoryScreenState extends State<CategoryScreen>
   void initState() {
     super.initState();
     _fadeController = AnimationController(
-        duration: const Duration(milliseconds: 800), vsync: this);
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
     _loadData();
   }
 
@@ -68,8 +70,9 @@ class _CategoryScreenState extends State<CategoryScreen>
 
     try {
       final catJson = await rootBundle.loadString('assets/$selectedJsonFile');
-      final detailJson =
-          await rootBundle.loadString('assets/krishna_story_detail.json');
+      final detailJson = await rootBundle.loadString(
+        'assets/krishna_story_detail.json',
+      );
 
       final catData = json.decode(catJson) as Map<String, dynamic>;
       final detailData = json.decode(detailJson) as Map<String, dynamic>;
@@ -101,7 +104,9 @@ class _CategoryScreenState extends State<CategoryScreen>
   List<StoryCategory> get _filtered {
     if (_searchQuery.isEmpty) return _categories;
     final q = _searchQuery.toLowerCase();
-    return _categories.where((c) => c.category.toLowerCase().contains(q)).toList();
+    return _categories
+        .where((c) => c.category.toLowerCase().contains(q))
+        .toList();
   }
 
   @override
@@ -131,8 +136,9 @@ class _CategoryScreenState extends State<CategoryScreen>
   Widget _buildSearchBar() {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveSize(20),
-          vertical: context.responsiveSize(8)),
+        horizontal: context.responsiveSize(20),
+        vertical: context.responsiveSize(8),
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.15),
@@ -145,14 +151,15 @@ class _CategoryScreenState extends State<CategoryScreen>
           decoration: InputDecoration(
             hintText: searchHint[selectedLanguage],
             hintStyle: TextStyle(
-                color: Colors.white70,
-                fontSize: context.responsiveFontSize(14)),
-            prefixIcon:
-                const Icon(Icons.search, color: Color(0xFFFFD36A)),
+              color: Colors.white70,
+              fontSize: context.responsiveFontSize(14),
+            ),
+            prefixIcon: const Icon(Icons.search, color: Color(0xFFFFD36A)),
             border: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(
-                horizontal: context.responsiveSize(20),
-                vertical: context.responsiveSize(14)),
+              horizontal: context.responsiveSize(20),
+              vertical: context.responsiveSize(14),
+            ),
           ),
         ),
       ),
@@ -162,7 +169,8 @@ class _CategoryScreenState extends State<CategoryScreen>
   Widget _buildGrid() {
     if (_isLoading) {
       return const Center(
-          child: CircularProgressIndicator(color: Color(0xFFFFD36A)));
+        child: CircularProgressIndicator(color: Color(0xFFFFD36A)),
+      );
     }
     final filtered = _filtered;
     return Padding(
@@ -183,8 +191,10 @@ class _CategoryScreenState extends State<CategoryScreen>
       tween: Tween(begin: 0.0, end: 1.0),
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeOutCubic,
-      builder: (_, v, child) =>
-          Transform.scale(scale: v, child: Opacity(opacity: v, child: child)),
+      builder: (_, v, child) => Transform.scale(
+        scale: v,
+        child: Opacity(opacity: v, child: child),
+      ),
       child: GestureDetector(
         onTap: () {
           AnalyticsService.instance.logCategoryTap(
@@ -210,12 +220,15 @@ class _CategoryScreenState extends State<CategoryScreen>
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(context.responsiveSize(18)),
-                border: Border.all(color: const Color(0xFFFFD36A).withOpacity(0.3)),
+                border: Border.all(
+                  color: const Color(0xFFFFD36A).withOpacity(0.3),
+                ),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black.withOpacity(0.25),
-                      blurRadius: 10,
-                      offset: const Offset(0, 6)),
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 10,
+                    offset: const Offset(0, 6),
+                  ),
                 ],
               ),
               child: ClipRRect(
@@ -228,16 +241,19 @@ class _CategoryScreenState extends State<CategoryScreen>
             ),
             SizedBox(height: context.responsiveSize(8)),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.responsiveSize(4)),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveSize(4),
+              ),
               child: Text(
                 category.category,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: context.responsiveFontSize(18),
-                    fontWeight: FontWeight.w600),
+                  color: Colors.white,
+                  fontSize: context.responsiveFontSize(18),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
