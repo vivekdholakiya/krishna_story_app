@@ -177,7 +177,7 @@ class _CategoryScreenState extends State<CategoryScreen>
       padding: EdgeInsets.symmetric(horizontal: context.responsiveSize(16)),
       child: MasonryGridView.count(
         key: ValueKey(_searchQuery),
-        crossAxisCount: 2,
+        crossAxisCount: MediaQuery.of(context).size.width >= 600 ? 3 : 2,
         mainAxisSpacing: context.responsiveSize(16),
         crossAxisSpacing: context.responsiveSize(16),
         itemCount: filtered.length,
